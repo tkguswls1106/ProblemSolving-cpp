@@ -23,6 +23,13 @@ vector 배열을 초기화 시켜줬다면, 배열의 인덱스에 직접 접근
 
 sort와 reverse함수를 사용하려면 #include <algorithm> 헤더를 작성해둬야한다.
 
+- 벡터의 여러가지 초기화 방법 -
+vector<int> v1;  // 아무것도 없는 비어있는 vector
+vector<int> v2(5);  // 5개의 int형을 저장하는 vector(전부 0으로 초기화)
+vector<int> v3(5,1);  // 5개의 int형을 저장하는 vector(전부 1로 초기화)
+vector<int> v4 = { 1,2,3,4,5 };  // 배열과 같은 초기화
+vector<int> v5(v4);  // v4의 벡터 요소를 복사해서 초기화
+
 // 역순 정렬. 참고로 v는 벡터 변수명임.
 reverse(v.begin(), v.end());
 
