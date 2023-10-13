@@ -21,6 +21,11 @@ vector 배열을 초기화 시켜줬다면, 배열의 인덱스에 직접 접근
 
 벡터또한 인덱스가 0부터 시작이며, v.begin()+2 는 v[2]인 세번째 인덱스를 의미한다.
 
+sort와 reverse함수를 사용하려면 #include <algorithm> 헤더를 작성해둬야한다.
+
+// 역순 정렬. 참고로 v는 벡터 변수명임.
+reverse(v.begin(), v.end());
+
 // 오름차순 정렬. 참고로 v는 벡터 변수명임.
 sort(v.begin(), v.end());
 sort(v.begin(), v.end(), less<int>());
@@ -114,6 +119,14 @@ Key값으로 hash value를 찾는 데에 시간이 적게 걸림.
 map은 데이터 양이 보다 적을때와 Key를 이용하여 정렬을 해야할때 권장한다.
 unordered_map은 대량의 데이터를 저장할때와 정렬이 필요없을때 권장한다.
 즉, 정렬이 필요 없을 경우에는 map보다는 unordered_map을 사용하는 것이 훨씬 성능이 좋다.
+
+---------------------------------------
+
+배열(벡터)의 요소의 합을 구하는 함수 accumulate
+#include <numeric.h>
+accumulate(시작, 끝, 하나씩 더할 값의 초깃값);
+int sum = accumulate(v.begin(), v.end(), 0);
+double sum = accumulate(v.begin(), v.end(), 0.0);
 
 ---------------------------------------
 
