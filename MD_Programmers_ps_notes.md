@@ -9,6 +9,9 @@ using namespace std;
 cout <<  // out이므로 밖을 가리키는 범위의 화살표로 외우면 편할듯?
 cin >>  // in이므로 안을 가리키는 범위의 화살표로 외우면 편할듯?
 
+ios::sync_with_stdio(0);
+cin.tie(0);
+
 ---------------------------------------
 
 < vector >
