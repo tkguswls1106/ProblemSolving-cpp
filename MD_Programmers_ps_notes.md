@@ -23,15 +23,52 @@ cout << str << "\n";
 // 참고로 vector 변수도 마찬가지로 똑같이 적용하면됨.
 reverse(str.begin(), str.end());
 
-string str = “TEST”; 일 때
+string str = "TEST"; 일 때
 str[0] 은 'T'를 반환. 
 str.at(0) 은 'E'를 반환.
-두 경우모두 반환되는 문자는 char형임.
+두 경우 모두 반환되는 문자는 char형임.
 
 string answer = "";
 answer += string(n,v);
 // 이것처럼 char과는 다르게 string은 문자열을 +로 이을수있으며,
 // push_back 메소드도 적용이 가능하다.
+
+str1.append(str2);  // str 문자열 맨 뒤에 str2 문자열을 추가함.
+
+string str_a ="7";
+string str_b ="7.02";
+string str_c ="3.14";
+string str_d = "2300000000";
+int after_a = stoi(str_a);  // "7"을 int형 7로 바꿔줌.
+double after_b = stod(str_b);  // "7.02"를 double형 7.02로 바꿔줌.
+float after_c = stof(str_c);  // "3.14"를 float형 3.14로 바꿔줌.
+long int after_d = stof(str_d);  // "2300000000"을 long int형으로 바꿔줌.
+
+// str1에서 문자열 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 -1을 반환받음.
+string str1 = "TEST";
+string str2 = "ST";
+str1.find(str2);  // 2 반환함. (TEST에서 ST의 S는 2번째 인덱스므로)
+
+string str2 = str1.substr(2);  // index 2의 위치부터 ~ 끝까지의 문자를 반환함.
+string str2 = str1.substr(2,3);  // index 2의 위치부터 3개의 문자를 반환함.
+
+str.insert(2,"bbb");  // index가 2인 위치에 있는 문자 앞에 삽입함.
+
+str.replace(2,3,"bbb");  // index가 2인 위치에 있는 문자부터 ~ 3개의 문자를 "bbb"로 대체함.
+
+str.erase(1,4);  // index 1~4인 부분을 부분적으로 지움.
+str.erase(str.begin() + 2);  // 3인덱스의 문자를 제거함.
+str.erase(find(str.begin(), str.end(), 'k'));  // str에서 k문자를 제거한다. 참고로 문자열이 아닌 문자 제거이다. 그리고 참고로 str.find()가 아닌 find()이다.
+
+// remove 및 erase 해석 및 설명
+my_string.erase(remove(my_string.begin(),my_string.end(),str[0]), my_string.end());
+// remove(my_string.begin(), my_string.end(), str[0]): 이 함수는 my_string의 시작부터 끝까지 탐색하면서 str[0]과 일치하는 모든 문자를 "제거"한다. 그런데 여기에서 "제거"는 실제로 해당 요소들을 문자열에서 삭제하는 것이 아니라, 문자열의 뒷부분으로 이동시키는 것을 의미한다. remove는 이동이 끝난 후의 마지막 위치의 반복자를 반환한다.
+// my_string.erase(...): remove에서 반환된 반복자를 사용하여 my_string에서 해당 위치부터 끝까지의 모든 문자를 "실제로 삭제"한다. 예를 들어, solution("apple", "pp")를 호출하면, str[0]은 'p'이다. 따라서 "apple"에서 'p' 문자를 모두 제거하면 결과는 "ale"가 된다.
+이해를 돕기 위해 단계별로 예를 들어 설명해보자면,
+원래 문자열: "apple"
+remove 후의 문자열: "alepp" ('p'가 끝으로 이동되었다.)
+remove가 반환한 반복자 위치: "ale|pp"
+erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수의 결과는 "ale"이다.
 
 ---------------------------------------
 
