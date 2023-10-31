@@ -48,7 +48,7 @@ find(v.begin(), v.end(), 30);  // 반복자 반환
 map<string,int> m = {
         {"ab", 10},{"cd", 20},{"ef", 30}
 };
-string key = "cd"
+string key = "cd";
 m.find(key);  // 반복자 반환 (인덱스 반환 아니니까 주의하기!)
 
 =======================================
