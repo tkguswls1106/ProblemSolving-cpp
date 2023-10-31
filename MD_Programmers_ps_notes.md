@@ -15,8 +15,9 @@ cout << num << '\n';
 ios::sync_with_stdio(0);
 cin.tie(0);
 
-'a'의 ASCII 값은 알파벳 'a'의 정수 표현이다. ASCII 값으로는 97이다.
 '0'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48이다.
+'A'의 ASCII 값은 알파벳 'A'의 정수 표현이다. ASCII 값으로는 65이다.
+'a'의 ASCII 값은 알파벳 'a'의 정수 표현이다. ASCII 값으로는 97이다.
 
 C++ 스타일의 형변환 방법은
 int(4.0)
@@ -26,8 +27,8 @@ static_cast<int>(4.0)
 
 < string >
 
-string str(i, '*');  // i 개의 '*' 문자를 가진 str이라는 변수명의 문자열 생성
-cout << str << "\n";
+string str1(i, '*');  // i 개의 '*' 문자를 가진 str1이라는 변수명의 문자열 생성
+cout << str1 << "\n";
 
 // 역순 정렬. 참고로 str은 스트링 변수명임.
 // 참고로 vector 변수도 마찬가지로 똑같이 적용하면됨.
@@ -39,7 +40,7 @@ str.at(0) 은 'E'를 반환.
 두 경우 모두 반환되는 문자는 char형임.
 
 string answer = "";
-answer += string(n,v);  // 이것처럼 char과는 다르게 string은 문자열을 +로 이을수있으며,
+answer += string(n,v);  // 이것처럼 char과는 다르게 string은 문자열을 +로 이을수있으며, (참고로 string(n,v)은 문자 v를 n번 반복한 문자열을 생성함.)
 str1.push_back(chr);  // push_back 메소드도 적용이 가능하다. (단 이것은 한문자만.)
 str1.push_back(str[0]);  // 위와 비슷한 맥락임.
 str1.append(str2);  // str 문자열 맨 뒤에 str2 문자열을 추가함.
@@ -49,15 +50,19 @@ string str_a ="7";
 string str_b ="7.02";
 string str_c ="3.14";
 string str_d = "2300000000";
+// 참고로 stoi 이런건 sto + int 이런 뜻이다. 정확히는 stod는 's'tring + 'to' + 'd'ouble, stof는 's'tring 'to' 'f'loat
 int after_a = stoi(str_a);  // "7"을 int형 7로 바꿔줌.
 double after_b = stod(str_b);  // "7.02"를 double형 7.02로 바꿔줌.
 float after_c = stof(str_c);  // "3.14"를 float형 3.14로 바꿔줌.
 long int after_d = stof(str_d);  // "2300000000"을 long int형으로 바꿔줌.
 
-// str1에서 문자열 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 -1을 반환받음.
+// str1에서 문자열or문자 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 -1을 반환받음.
 string str1 = "TEST";
 string str2 = "ST";
 str1.find(str2);  // 2 반환함. (TEST에서 ST의 S는 2번째 인덱스므로)
+str1.find("ST"); // 2 반환함. (주의: 문자열 넣었으므로 큰따옴표로만 사용하기.)
+str1.find('S'); // 2 반환함. (주의: 문자 넣었으므로, 'S' 또는 "S" 모두 사용가능.)
+// 그냥 속편하게 전부 큰따옴표로 통일해서 사용하는것이 나을듯하다.
 
 string str2 = str1.substr(2);  // index 2의 위치부터 ~ 끝까지의 문자를 반환함.
 string str2 = str1.substr(2,3);  // index 2의 위치부터 3개의 문자를 반환함.
@@ -65,19 +70,76 @@ string str2 = str1.substr(2,3);  // index 2의 위치부터 3개의 문자를 �
 str.insert(2,"bbb");  // index가 2인 위치에 있는 문자 앞에 삽입함.
 
 str.replace(2,3,"bbb");  // index가 2인 위치에 있는 문자부터 ~ 3개의 문자를 "bbb"로 대체함.
+// 위의 변환 내용은 aaaaaaaa -> aabbbaaa
+str.replace(2,4,"bbb");  // index가 2인 위치에 있는 문자부터 ~ 4개의 문자를 "bbb"로 대체함.
+// 위의 변환 내용은 aaaaaaaa -> aabbbaa
 
-str.erase(1,4);  // index 1~4인 부분을 부분적으로 지움.
-str.erase(str.begin() + 2);  // 3인덱스의 문자를 제거함.
-str.erase(find(str.begin(), str.end(), 'k'));  // str에서 k문자를 제거한다. 참고로 문자열이 아닌 문자 제거이다. 그리고 참고로 str.find()가 아닌 find()이다.
+-------------
+
+// 이 string에서의 erase 함수는 직접적인 인덱스를 파라미터로 줄때와 반복자를 파라미터로 줄때 삭제 방식이 다름.
+// 그리고 참고로 str.erase(반복자1, 반복자2); 의 의미는 반복자1의 위치부터 반복자2의 위치전까지 삭제한다는 뜻임. (즉, 반복자1위치 ~ 반복자2위치-1 까지 삭제.)
+string str = "0123456789";  // 밑의 메소드 사이사이에 다시 원래값으로 되돌려놓는것으로 가정하고 설명하겠다.
+
+str.erase(2);  // index가 2인 위치에 있는 문자부터 전부 제거함.
+// => "01"
+
+str.erase(2,4);  // index가 2인 위치에 있는 문자부터 ~ 4개의 문자를 제거함.
+// => "016789"
+
+str.erase(str.begin());  // 0인덱스(첫번째 문자)의 문자만 제거함.
+// => "123456789"
+
+str.erase(str.begin() + 1);  // 1인덱스(두번째 문자)의 문자만 제거함.
+// => "023456789"
+
+str.erase(str.begin() + 2);  // 2인덱스(세번째 문자)의 문자만 제거함.
+// => "023456789"
+
+str.erase(str.end());  // end() 반복자는 마지막의 다음부분을 의미하므로, 아무것도 제거하지 못함.
+// => "0123456789"
+
+str.erase(str.end() - 1);  // end()-1 반복자는 마지막 부분을 의미하므로, 마지막 문자만 제거함.
+// => "012345678"
+
+str.erase(str.begin(), str.end());  // begin() ~ end()-1 위치까지 삭제하므로, 전체를 삭제함.
+// => ""
+// 헷갈리지 말아야할것은, end()가 마지막 다음위치를 가리킨다는 것이고, str.erase(반복자1, 반복자2); 에서 반복자2의 의미는 '반복자2'-1 위치까지 제거하겠다는 의미가 된다는 것이다.
+
+str.erase(str.begin(), str.end()-1);  // begin() ~ end()-2 위치까지 삭제하므로, 마지막을 제외한 나머지를 삭제함.
+// => "9"
+
+str.erase(str.begin()+1, str.begin()+4);  // begin()+1 ~ begin()+4-1 위치까지 삭제하므로, 1인덱스부터 3인덱스까지 삭제함.
+// => "0456789"
+
+string str = "01k234k5";
+str.erase(find(str.begin(), str.end(), 'k'));
+// => "01234k5"
+// find(str.begin(), str.end(), 'k') 의 반환값은 첫번째로 나오는 k문자의 반복자 위치이다.
+// 그러므로, str에서 첫번째로 나오는 k문자만 제거한다. 참고로 문자열이 아닌 문자 제거이다.
+// 그리고 참고로 str.find()가 아닌 find()이다. str.find()는 문자열을 파라미터로 넣어주고 인덱스를 반환하는 반면, find()는 반복자를 파라미터로 넣어주어야하며 반환값도 반복자가 된다.
+// 즉, str.find()가 아닌 find() 함수이기에 인덱스가 아닌 반복자가 반환되어, 해당 인덱스부터 전부 제거의 의미가 아닌, 해당 반복자 위치만 제거의 의미가 된다.
+
+string str = "01k234k5";
+str.erase(str.find("k"));
+// find()가 아닌 str.find() 함수이기에 반복자가 아닌 인덱스가 반환되어, 해당 반복자 위치만 제거의 의미가 아닌, 해당 인덱스부터 전부 제거의 의미가 된다.
+// => "01"
+
+string str = "01k234k5";
+str.erase(str.find("k2"));
+// find()가 아닌 str.find() 함수이기에 반복자가 아닌 인덱스가 반환되어, 해당 반복자 위치만 제거의 의미가 아닌, 해당 인덱스부터 전부 제거의 의미가 된다.
+// => "01"
+
+-------------
 
 // remove 및 erase 해석 및 설명
 my_string.erase(remove(my_string.begin(),my_string.end(),str[0]), my_string.end());
-// remove(my_string.begin(), my_string.end(), str[0]): 이 함수는 my_string의 시작부터 끝까지 탐색하면서 str[0]과 일치하는 모든 문자를 "제거"한다. 그런데 여기에서 "제거"는 실제로 해당 요소들을 문자열에서 삭제하는 것이 아니라, 문자열의 뒷부분으로 이동시키는 것을 의미한다. remove는 이동이 끝난 후의 마지막 위치의 반복자를 반환한다.
+// remove(my_string.begin(), my_string.end(), str[0]): 이 함수는 my_string의 시작부터 끝까지 탐색하면서 str[0]과 일치하는 '모든' 문자를 '전부' "제거"한다. 그런데 여기에서 "제거"는 실제로 해당 요소들을 문자열에서 삭제하는 것이 아니라, 삭제 후 비게된 크기만큼 앞으로 땡겨 이동하여 문자열의 뒷부분을 이외것들로 채우는 것을 의미한다. 즉, remove 후 문자열의 길이는 동일하게 유지되는 것이다. 그리고 remove는 이동이 끝난 후의 마지막 위치의 반복자를 반환한다.
+결론적으로, '이동이 끝난 후의 마지막 위치의 반복자' ~ 'end()-1 위치' 까지 삭제를 하는 의미가 되어 해당 문자를 모두 찾아 삭제하게 되는 것이다.
 // my_string.erase(...): remove에서 반환된 반복자를 사용하여 my_string에서 해당 위치부터 끝까지의 모든 문자를 "실제로 삭제"한다. 예를 들어, solution("apple", "pp")를 호출하면, str[0]은 'p'이다. 따라서 "apple"에서 'p' 문자를 모두 제거하면 결과는 "ale"가 된다.
 이해를 돕기 위해 단계별로 예를 들어 설명해보자면,
 원래 문자열: "apple"
-remove 후의 문자열: "alepp" ('p'가 끝으로 이동되었다.)
-remove가 반환한 반복자 위치: "ale|pp"
+remove 후의 문자열: "alele" ('p'가 삭제된만큼 앞으로 땡겨 이동되면서 뒷부분이 이외의것들로 채워진다.)
+remove가 반환한 반복자 위치: "ale|le"
 erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수의 결과는 "ale"이다.
 
 =======================================
