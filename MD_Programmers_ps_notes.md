@@ -23,6 +23,9 @@ C++ 스타일의 형변환 방법은
 int(4.0)
 static_cast<int>(4.0)
 
+반복자가 두가지 들어가는 함수인 함수명(반복자1, 반복자2); 이런것은 위치가 "반복자1" ~ "'반복자2'-1" 를 의미한다.
+절대로 "반복자1" ~ "반복자2" 위치라고 잘못 헷갈리지 말자.
+
 =======================================
 
 < string >
@@ -149,14 +152,17 @@ erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수
 vector 도 배열 안의 요소를 복사해서 넣어주는 방식을 사용하므로 지역변수처럼 값이 다시 원래대로 돌아와, 참조를 활용해야한다.
 
 vector 배열을 초기화 시켜주지않았다면, 배열의 인덱스에 직접 접근해서 값을 할당하는건 불가능하다. 이러한 경우에는 push_back으로 넣어주어야한다.
-push_back은 마지막부분에 요소를 추가시키는 반면, pop_back은 마지막부분의 요소를 삭제시킨다.
+참고로 push_back은 마지막부분에 요소를 추가시키는 반면, pop_back은 마지막부분의 요소를 삭제시킨다.
 
 vector 배열을 초기화 시켜줬다면, 배열의 인덱스에 직접 접근해서 값을 할당하는것도 가능하다.
 
+참고로 vector는 벡터명 그자체를 cout으로 바로 출력은 불가능하다. 예를들어
+cout << v << "\n"; 는 불가능하다는 의미이다.
+
 벡터또한 인덱스가 0부터 시작이며, v.begin()+2 는 v[2]인 세번째 인덱스를 의미한다.
 
-erase(v.begin()+1, v.begin()+4); 를 해줌으로써 vector의 1~3요소가 삭제된다.
-즉, 1 <= 삭제 < 4 로 마지막은 포함되지 않는다.
+erase(v.begin()+1, v.begin()+4); 를 해줌으로써 vector의 1인덱스~3인덱스 요소가 삭제된다.
+즉, 인덱스 1 <= 삭제 < 4 로 마지막은 포함되지 않는다.
 
 벡터에서 erase 및 insert 함수는 요소의 인덱스를 사용하는 것이 아니라 반복자를 파라미터로 넣어 사용해야 한다.
 
@@ -166,20 +172,21 @@ find와 sort와 reverse함수를 사용하려면 #include <algorithm> 헤더를 
 vector<int> v1;  // 아무것도 없는 비어있는 vector
 vector<int> v2(5);  // 5개의 int형을 저장하는 vector(전부 0으로 초기화)
 vector<int> v3(5,1);  // 5개의 int형을 저장하는 vector(전부 1로 초기화)
-vector<int> v4 = { 1,2,3,4,5 };  // 배열과 같은 초기화
+vector<int> v4 = { 1,2,3,4,5 };  // 배열과 같은 초기화 (참고로 v4.end()-1 위치가 요소5 부분이다.)
 vector<int> v5(v4);  // v4의 벡터 요소를 복사해서 초기화
+vector<int> v6(v4.begin(), v4.end());  // v4의 벡터 요소를 begin()부터 end()-1 부분까지 복사해서 초기화. (즉, 전부 복사의 의미와 동일.)
 
 v.front() - 벡터의 첫 번째 요소를 반환한다. (요소 실제값)
 v.back() - 벡터의 마지막 요소를 반환한다. (요소 실제값)
 v.begin() - 벡터의 첫 번째 요소를 가리킨다. (반복자)
-v.end() - 벡터의 마지막 요소를 가리킨다. (반복자)
+v.end() - 벡터의 마지막 요소를 가리킨다. 정확히말하자면 마지막요소의 다음부분을 가리킨다. (반복자)
 
 // vector내에서 해당 원소가 위치하는 인덱스 찾기
 find(v.begin(), v.end(), 찾을 대상) - v.begin()
 
 // 밑은 입력받은 num1부터 num2 인덱스의 요소를 가진 벡터를 리턴해야하는 문제의 답코드이다.
 vector<int> solution(vector<int> numbers, int num1, int num2) {
-    vector<int> answer(numbers.begin()+num1, numbers.begin()+num2+1);
+    vector<int> answer(numbers.begin()+num1, numbers.begin()+num2+1);  // 이래야지 begin()+num1 ~ begin()+num2+1-1 부분을 의미하게 된다.
     return answer;
 }
 
@@ -242,7 +249,7 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
 pair는 2개를 묶어주는 구조체이다.
 pair은 utility 헤더에 존재하며, 프로그래머스에서는 아마 vector 헤더로 대체 가능한듯 하다.
 
-마치 map과 비슷하다. 단, map은 pair과 다른 점이라면 key값이 중복될 수 없다.
+마치 map과 비슷하다. 단, pair은 map과 다른 점이라면 key값이 중복될 수 있다. 반면 map은 key값이 중복될 수 없다.
 
 make_pair(1,2) 이것과 {1,2}는 같은 맥락이다.
 pair끼리 비교도 가능하다. pair끼리 비교를 하면 first를 기준으로 먼저 비교를 하게 된다. first가 같다면 second를 비교하게 된다.
@@ -279,12 +286,14 @@ map1.insert(make_pair(10, 20));
 map.insert({key,value});
 map.insert({{key1,value1}, {key2, value}});
 
-    for (unordered_map<int, int>::iterator iter = map1.begin(); iter != map1.end(); iter++)
+    unordered_map<int, int>::iterator iter;  // 물론 밑의 for문 안에 한번에 작성도 가능하긴하다.
+    for (iter = map1.begin(); iter != map1.end(); iter++)
     {
         cout << iter->first << " " << iter->second << "\n";
     }
 
-map 순회는 vector나 array랑 다르게 index가 아닌 iterator를 사용한다.
+map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 각 인덱스로 map[i]를 접근하는 방법이 아닌, iterator로 요소에 접근해야한다. 반면 vector은 반복문에서 각 인덱스로도 접근이 가능하다.
+즉, map 반복문 순회는 vector나 array랑 다르게 index가 아닌 iterator를 사용한다.
 그래도 map은 insert없이 m[i] = "값" 으로만 적어도 없는지 확인하고 없으면 삽입한다.
 위의 방법으로 조회와 수정도 가능하다.
 단, vector iterator 처럼 iter[3] 같이 map이 아닌 iterator로는 임의접근 안된다. 즉, iter[3]은 안되고 map[3]은 가능하단 뜻이다.
@@ -301,8 +310,6 @@ map에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수
     } else {
         cout << "Key does not exist!" << endl;
     }
-
-map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 각 인덱스로 map[i]를 접근하는 방법이 아닌, iterator로 요소에 접근해야한다. 반면 vector은 반복문에서 각 인덱스로도 접근이 가능하다.
 
 그리고 map은 map 헤더에 존재하며, pair와 동일하게 사용할 수 있다. pair과 다른 점이라면 key값이 중복될 수 없다.
 반면 pair은 utility 헤더에 존재하며, pair는 2개를 묶어주는 구조체이다.
