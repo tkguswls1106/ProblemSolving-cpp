@@ -16,6 +16,7 @@ ios::sync_with_stdio(0);
 cin.tie(0);
 
 '0'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48이다.
+'9'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48+9=57이다.
 'A'의 ASCII 값은 알파벳 'A'의 정수 표현이다. ASCII 값으로는 65이다.
 'a'의 ASCII 값은 알파벳 'a'의 정수 표현이다. ASCII 값으로는 97이다.
 
@@ -25,6 +26,9 @@ static_cast<int>(4.0)
 
 반복자가 두가지 들어가는 함수인 함수명(반복자1, 반복자2); 이런것은 위치가 "반복자1" ~ "'반복자2'-1" 를 의미한다.
 절대로 "반복자1" ~ "반복자2" 위치라고 잘못 헷갈리지 말자.
+
+for문에서 파라미터값으로 증감식 생략을 할 수 있고, 생략하게되면 무한루프에 빠지게된다.
+그래서 위를 응용하자면, 생략후 for문 안에서 if~else문을 이용해서 증감식을 따로 작성해줄수도 있다.
 
 -------------
 
@@ -52,6 +56,46 @@ map<string,int> m = {
 };
 string key = "cd";
 m.find(key);  // 반복자 반환 (인덱스 반환 아니니까 주의하기!)
+
+< set 에서의 find >
+int key = 10;
+s.find(key);  // 반복자 반환 (인덱스 반환 아니니까 주의하기!)
+
+-------------
+
+[ 자료형에 따른 erase 파라미터값 ]
+
+< string 에서의 erase >
+str.erase(인덱스);  // 인덱스부터 전부 삭제.
+str.erase(인덱스, 개수);  // 인덱스부터 개수만큼 삭제.
+str.erase(반복자);  // 해당 반복자 위치의 요소만 삭제.
+str.erase(반복자1, 반복자2);  // "반복자1" ~ "'반복자2'-1" 위치 범위의 요소 삭제.
+
+< vector 에서의 erase >
+// vector에서는 인덱스 파라미터 불가능함.
+v.erase(반복자);  // 해당 반복자 위치의 요소만 삭제.
+v.erase(반복자1, 반복자2);  // "반복자1" ~ "'반복자2'-1" 위치 범위의 요소 삭제.
+
+-------------
+
+[ erase 응용 예시 ]
+
+< remove 및 erase 해석 및 설명 (string 형식에서) >
+my_string.erase(remove(my_string.begin(),my_string.end(),str[0]), my_string.end());
+// remove(my_string.begin(), my_string.end(), str[0]): 이 함수는 my_string의 시작부터 끝까지 탐색하면서 str[0]과 일치하는 '모든' 문자를 '전부' "제거"한다. 그런데 여기에서 "제거"는 실제로 해당 요소들을 문자열에서 삭제하는 것이 아니라, 삭제 후 비게된 크기만큼 앞으로 땡겨 이동하여 문자열의 뒷부분을 이외것들로 채우는 것을 의미한다. 즉, remove 후 문자열의 길이는 동일하게 유지되는 것이다. 그리고 remove는 이동이 끝난 후의 마지막 위치의 반복자를 반환한다.
+결론적으로, '이동이 끝난 후의 마지막 위치의 반복자' ~ 'end()-1 위치' 까지 삭제를 하는 의미가 되어 해당 문자를 모두 찾아 삭제하게 되는 것이다.
+// my_string.erase(...): remove에서 반환된 반복자를 사용하여 my_string에서 해당 위치부터 끝까지의 모든 문자를 "실제로 삭제"한다. 예를 들어, solution("apple", "pp")를 호출하면, str[0]은 'p'이다. 따라서 "apple"에서 'p' 문자를 모두 제거하면 결과는 "ale"가 된다.
+이해를 돕기 위해 단계별로 예를 들어 설명해보자면,
+원래 문자열: "apple"
+remove 후의 문자열: "alele" ('p'가 삭제된만큼 앞으로 땡겨 이동되면서 뒷부분이 이외의것들로 채워진다.)
+remove가 반환한 반복자 위치: "ale|le"
+erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수의 결과는 "ale"이다.
+
+< unique 및 erase 해석 및 설명 (vector 형식에서) >
+unique는 '#include <algorithm>' 헤더를 선언해야하며, 벡터의 중복된 원소를 제거해주는 역할을 한다.
+unique 또한 위의 remove처럼 erase 함수를 추가적으로 이용해야하며, 사용방법은 위와 비슷하다.
+v.erase(unique(v.begin(), v.end()), v.end());
+이처럼 사용한다.
 
 =======================================
 
@@ -159,19 +203,6 @@ str.erase(str.find("k2"));
 // find()가 아닌 str.find() 함수이기에 반복자가 아닌 인덱스가 반환되어, 해당 반복자 위치만 제거의 의미가 아닌, 해당 인덱스부터 전부 제거의 의미가 된다.
 // => "01"
 
--------------
-
-// remove 및 erase 해석 및 설명
-my_string.erase(remove(my_string.begin(),my_string.end(),str[0]), my_string.end());
-// remove(my_string.begin(), my_string.end(), str[0]): 이 함수는 my_string의 시작부터 끝까지 탐색하면서 str[0]과 일치하는 '모든' 문자를 '전부' "제거"한다. 그런데 여기에서 "제거"는 실제로 해당 요소들을 문자열에서 삭제하는 것이 아니라, 삭제 후 비게된 크기만큼 앞으로 땡겨 이동하여 문자열의 뒷부분을 이외것들로 채우는 것을 의미한다. 즉, remove 후 문자열의 길이는 동일하게 유지되는 것이다. 그리고 remove는 이동이 끝난 후의 마지막 위치의 반복자를 반환한다.
-결론적으로, '이동이 끝난 후의 마지막 위치의 반복자' ~ 'end()-1 위치' 까지 삭제를 하는 의미가 되어 해당 문자를 모두 찾아 삭제하게 되는 것이다.
-// my_string.erase(...): remove에서 반환된 반복자를 사용하여 my_string에서 해당 위치부터 끝까지의 모든 문자를 "실제로 삭제"한다. 예를 들어, solution("apple", "pp")를 호출하면, str[0]은 'p'이다. 따라서 "apple"에서 'p' 문자를 모두 제거하면 결과는 "ale"가 된다.
-이해를 돕기 위해 단계별로 예를 들어 설명해보자면,
-원래 문자열: "apple"
-remove 후의 문자열: "alele" ('p'가 삭제된만큼 앞으로 땡겨 이동되면서 뒷부분이 이외의것들로 채워진다.)
-remove가 반환한 반복자 위치: "ale|le"
-erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수의 결과는 "ale"이다.
-
 =======================================
 
 < vector >
@@ -202,6 +233,7 @@ vector<int> v3(5,1);  // 5개의 int형을 저장하는 vector(전부 1로 초�
 vector<int> v4 = { 1,2,3,4,5 };  // 배열과 같은 초기화 (참고로 v4.end()-1 위치가 요소5 부분이다.)
 vector<int> v5(v4);  // v4의 벡터 요소를 복사해서 초기화
 vector<int> v6(v4.begin(), v4.end());  // v4의 벡터 요소를 begin()부터 end()-1 부분까지 복사해서 초기화. (즉, 전부 복사의 의미와 동일.)
+// 아마 위의 v6의 파라미터로 set를 넣어도 될것이다.
 
 v.front() - 벡터의 첫 번째 요소를 반환한다. (요소 실제값)
 v.back() - 벡터의 마지막 요소를 반환한다. (요소 실제값)
@@ -304,9 +336,9 @@ p2 = make_pair(arr, "vector pair");
 map은 각 노드가 key와 value 쌍으로 이루어진 트리이다. 특히, 중복을 허용하지 않는다.
 map은 key를 기준으로 정렬하며 오름차순으로 정렬한다.
 #include <map>
-map <key, value> map1;
-- 오름차순 기본형태: map <int, int> map1;
-- 내림차순 형태 예시1: map <int, int, greater> map1;
+map<key, value> map1;
+- 오름차순 기본형태: map<int, string> map1;
+- 내림차순 형태 예시1: map<int, string, greater<int>> map1;
 - 내림차순 형태 예시2: 데이터에 -(마이너스)를 붙여 삽입하여 처리하면 내림차순으로 정렬된다.
 
 map1.insert(make_pair(10, 20));
@@ -347,7 +379,7 @@ map에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수
 
 - map:
 #include <map>
-map <int, int> map1;
+map<int, int> map1;
 pair<const Key, T> 로 이루어진 컨테이너임.
 Key값 기준으로 기본적으로 오름차순 sorting 되어있음.
 균형 이진탐색트리중에서 레드블랙트리로 구현되면서 sorting하므로 unordered_map보다 value값을 찾는 데에 오래걸릴 수 있음.
@@ -356,7 +388,7 @@ map은 데이터 양이 보다 적을때와 Key를 이용하여 정렬을 해야
 
 - unordered_map:
 #include <unordered_map>
-unordered_map <int, int> map1;
+unordered_map<int, int> map1;
 map과는 달리 Key 혹은 Value 기준으로 sorting 되어있지 않은 컨테이너임.
 hash table 기반 hash container임. (Average: O(1)) 우리가 흔히 사용하는 hash 자료구조에 해당된다고 보면 됨.
 Key값으로 hash value를 찾는 데에 시간이 적게 걸림.
@@ -365,6 +397,23 @@ Key값으로 hash value를 찾는 데에 시간이 적게 걸림.
 map은 데이터 양이 보다 적을때와 Key를 이용하여 정렬을 해야할때 권장한다.
 unordered_map은 대량의 데이터를 저장할때와 정렬이 필요없을때 권장한다.
 즉, 정렬이 필요 없을 경우에는 map보다는 unordered_map을 사용하는 것이 훨씬 성능이 좋다.
+
+=======================================
+
+< set >
+
+연관 컨테이너중 하나임.
+key값은 중복이 허용되지않음.
+자동으로 오름차순 정렬해줌.
+#include <set>
+set<int> s;
+- 오름차순 기본형태: set<int> set1;
+- 내림차순 형태 예시: set<int, greater<int>> set1;
+
+set<int> s = { 1,2,3,4,5 };
+s.insert(4);
+
+find시에 find()말고 set1.find() 사용해야하며, 반환값은 인덱스가 아닌 반복자이다.
 
 =======================================
 
