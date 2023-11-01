@@ -94,6 +94,7 @@ erase를 사용하여 "pp"를 삭제한 후의 문자열: "ale" 따라서 함수
 < unique 및 erase 해석 및 설명 (vector 형식에서) >
 unique는 '#include <algorithm>' 헤더를 선언해야하며, 벡터의 중복된 원소를 제거해주는 역할을 한다.
 unique 또한 위의 remove처럼 erase 함수를 추가적으로 이용해야하며, 사용방법은 위와 비슷하다.
+단, 주의할 점은 unique 함수를 실행하기 전에 정렬되어 있어야한다. (sort 함수로 먼저 정렬하기.)
 v.erase(unique(v.begin(), v.end()), v.end());
 이처럼 사용한다.
 
@@ -282,11 +283,13 @@ vector<int> solution(vector<int> numbers) {
 int max = *max_element(v.begin(), v.end());
 // 그 이유는 begin과 end는 요소의 값을 반환하는게 아닌 요소를 가리키는것 뿐이기때문인데, 그렇기에 *포인터를 붙여서 벡터에서 최댓값을 가리키는 반복자가 가리키는 값을 반환하는 것이다.
 // 만약 *포인터를 뺐다면 최댓값을 가리키는 반복자를 반환하는 것이기에 에러가 난다.
+// 참고로 이는 #include <algorithm> 헤더를 작성해야 사용가능하다.
 
 // 백터 배열 max 인덱스 구하는법
 int max_index = max_element(v.begin(), v.end()) - v.begin();
 // 'max_element(v.begin(), v.end())' - 'v.begin()' 인것이다.
 // 그 이유는 최댓값을 가리키는 반복자와 벡터의 시작 위치를 가리키는 반복자 간의 차를 계산함으로써, 최대 인덱스를 구하는 것이기 때문이다.
+// 참고로 이는 #include <algorithm> 헤더를 작성해야 사용가능하다.
 
 map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 각 인덱스로 map[i]를 접근하는 방법이 아닌, iterator로 요소에 접근해야한다. 반면 vector은 반복문에서 각 인덱스로도 접근이 가능하다.
 
@@ -403,7 +406,7 @@ unordered_map은 대량의 데이터를 저장할때와 정렬이 필요없을�
 < set >
 
 연관 컨테이너중 하나임.
-key값은 중복이 허용되지않음.
+key(요소)값은 중복이 허용되지않음.
 자동으로 오름차순 정렬해줌.
 #include <set>
 set<int> s;
@@ -414,6 +417,14 @@ set<int> s = { 1,2,3,4,5 };
 s.insert(4);
 
 find시에 find()말고 set1.find() 사용해야하며, 반환값은 인덱스가 아닌 반복자이다.
+
+사용자가 set객체에 주어진 값의 쌍이 있는지 확인해야하는 경우 멤버 함수 count를 사용할 수 있다.
+set에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수는 정확히 1이 된다. 반면에 키를 찾을 수 없으면 count 함수는 0을 반환한다.
+    if (s.count(key)) {
+        cout << "Element Exists!" << endl;
+    } else {
+        cout << "Element does not exist!" << endl;
+    }
 
 =======================================
 
@@ -539,6 +550,7 @@ string solution(string morse) {
 
 주어진 문자열에서 필요한 자료형에 맞는 정보를 꺼낼 때 유용하게 사용됨.
 stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료형의 정보를 빼낸다.
+헷갈리지말아야할것은, 이는 char문자 형식으로 추출이 아닌, string문자열 형식으로 추출한다.
 밑은 그 예시다.
 
  #include <string>
@@ -570,7 +582,7 @@ stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료�
 -------------
 
 배열(벡터)의 요소의 합을 구하는 함수 accumulate
-#include <numeric.h>
+#include <numeric>
 accumulate(시작, 끝, 하나씩 더할 값의 초깃값 sum 초깃값);
 int sum = accumulate(v.begin(), v.end(), 0);
 double sum = accumulate(v.begin(), v.end(), 0.0);
