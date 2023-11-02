@@ -129,7 +129,8 @@ string str_d = "2300000000";
 int after_a = stoi(str_a);  // "7"을 int형 7로 바꿔줌.
 double after_b = stod(str_b);  // "7.02"를 double형 7.02로 바꿔줌.
 float after_c = stof(str_c);  // "3.14"를 float형 3.14로 바꿔줌.
-long int after_d = stof(str_d);  // "2300000000"을 long int형으로 바꿔줌.
+long int after_d = stol(str_d);  // "2300000000"을 long int형으로 바꿔줌.
+long long num = stoll(str);  // 문자열 str을 long long형으로 바꿔줌.
 
 // 다른자료형에서 string으로 변환법 예시
 int num = 43;
@@ -360,6 +361,7 @@ map1.insert({{key1,value1}, {key2, value}});
 
 map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 각 인덱스로 map[i]를 접근하는 방법이 아닌, iterator로 요소에 접근해야한다. 반면 vector은 반복문에서 각 인덱스로도 접근이 가능하다.
 즉, map 반복문 순회는 vector나 array랑 다르게 index가 아닌 iterator를 사용한다.
+단, for(auto keyvalue : map1) { keyvalue.first 및 keyvalue.second 사용 } 이런식의 for 루프 순회는 가능하다.
 그래도 map은 insert없이 m[i] = "값" 으로만 적어도 없는지 확인하고 없으면 삽입한다.
 위의 방법으로 조회와 수정도 가능하다.
 단, vector iterator 처럼 iter[3] 같이 map이 아닌 iterator로는 임의접근 안된다. 즉, iter[3]은 안되고 map[3]은 가능하단 뜻이다.
@@ -584,6 +586,34 @@ stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료�
  }
 
 -------------
+
+< stringstream 응용 예시코드 >
+
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+int solution()
+    string my_string = "3 + 7 - 5";
+    stringstream ss(my_string);
+
+    int result;
+    ss >> result;  // ss에서 맨처음나온 반환값을 result변수에 할당.
+
+    char op; int num;
+    while (!ss.eof()) {  // 또는 while(ss >> op >> num) 이렇게 한번에 적어도됨.
+        ss >> op;  // ss에서 나온 반환값중 char 자료형인 값은 op변수에 할당.
+        ss >> num;  // ss에서 나온 반환값중 int 자료형인 값은 num변수에 할당.
+
+        if (op == '+') result += num;
+        else result -= num;
+    }
+
+    return result;  // my_string 연산결과값
+}
+
+=======================================
 
 배열(벡터)의 요소의 합을 구하는 함수 accumulate
 #include <numeric>
