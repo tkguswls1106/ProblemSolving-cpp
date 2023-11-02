@@ -131,6 +131,10 @@ double after_b = stod(str_b);  // "7.02"를 double형 7.02로 바꿔줌.
 float after_c = stof(str_c);  // "3.14"를 float형 3.14로 바꿔줌.
 long int after_d = stof(str_d);  // "2300000000"을 long int형으로 바꿔줌.
 
+// 다른자료형에서 string으로 변환법 예시
+int num = 43;
+string s = to_string(num);
+
 // str1에서 문자열or문자 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 -1을 반환받음.
 string str1 = "TEST";
 string str2 = "ST";
@@ -595,6 +599,11 @@ sqrt(9)  // 루트 9 = 3
 min, max
 #include <algorithm>
 max(value1, value2)
+
+영어 소문자,대문자로 변환
+#include <cctype>  // 근데 이거 헤더 선언안해도 잘실행되는듯? 하다.
+ch = tolower(ch);  // 소문자로 변환
+ch = toupper(ch);  // 대문자로 변환
 
 =======================================
 
