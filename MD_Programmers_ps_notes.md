@@ -30,6 +30,18 @@ static_cast<int>(4.0)
 for문에서 파라미터값으로 증감식 생략을 할 수 있고, 생략하게되면 무한루프에 빠지게된다.
 그래서 위를 응용하자면, 생략후 for문 안에서 if~else문을 이용해서 증감식을 따로 작성해줄수도 있다.
 
+// int to char 방법
+int zeroNum = 0;
+int fiveNum = 5;
+char ch1 = zeroNum + '0';  // ch1 은 문자'0'
+char ch2 = fiveNum + '0';  // ch2 은 문자'5'
+
+// char to int 방법
+char zeroCh = '0';
+char fiveCh = '5';
+int num1 = zeroCh - '0';  // num1 은 숫자0
+int num2 = fiveCh - '0';  // num2 은 숫자5
+
 -------------
 
 [ 자료형에 따른 find 종류 및 반환값 설명 ]
@@ -42,13 +54,13 @@ for문에서 파라미터값으로 증감식 생략을 할 수 있고, 생략하
 
 < string 에서의 find >
 string str = "TEST";
-str.find("ST");  // 인덱스 반환
+str.find("ST");  // 인덱스 반환 (만약 일치하는 값이 없다면, string::npos(== 쓰레기 값)인 4294967295 처럼 반환함.)
 str.find("S");  // 인덱스 반환
 find(str.begin(), str.end(), 'S');  // 반복자 반환
 
 < vector 에서의 find >
 vector<int> v = {10, 20, 30, 40, 50};
-find(v.begin(), v.end(), 30);  // 반복자 반환
+find(v.begin(), v.end(), 30);  // 반복자 반환 (만약 범위 내에 찾고자 하는 값이 없다면, 반복자 end를 반환함.)
 
 < map 에서의 find >
 map<string,int> m = {
@@ -136,13 +148,36 @@ long long num = stoll(str);  // 문자열 str을 long long형으로 바꿔줌.
 int num = 43;
 string s = to_string(num);
 
-// str1에서 문자열or문자 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 -1을 반환받음.
+// str1에서 문자열or문자 str2를 찾고, 이것의 str1에서의 시작점 인덱스를 반환함. 존재하지않으면 string::npos(== 쓰레기 값)인 4294967295 처럼 반환함.
 string str1 = "TEST";
 string str2 = "ST";
 str1.find(str2);  // 2 반환함. (TEST에서 ST의 S는 2번째 인덱스므로)
 str1.find("ST"); // 2 반환함. (주의: 문자열 넣었으므로 큰따옴표로만 사용하기.)
 str1.find('S'); // 2 반환함. (주의: 문자 넣었으므로, 'S' 또는 "S" 모두 사용가능.)
 // 그냥 속편하게 전부 큰따옴표로 통일해서 사용하는것이 나을듯하다.
+
+// 위의 str1.find("ST")와 같은 find함수에서 못찾는경우 예시
+    string str = "hello world";
+    if (str.find("world") != string::npos)
+    {
+        cout << "find Success" << "\n";
+        cout << "find Index: " << str.find("world") << "\n";
+    }
+    else {
+        cout << "find fail" << "\n";
+    }
+
+// string에서는 vector처럼, distance함수를 활용하여, iterator에서의 특정 반복자가 가리키는 string의 실제 인덱스를 구할 수 있다.
+// 사용방법은, distance(str.begin(), iter); 을 활용한다. 이는 첫인덱스부터 찾은반복자 사이의 거리를 이용하여 index를 찾는것이다.
+// 밑은 예시 코드이다.
+string str = "cake";
+auto iter = find(str.begin(), str.end(), 'k');
+if(iter != str.end()) {
+    int idx = distance(str.begin(), iter);  // begin()부터 iter반복자 사이의 거리계산.
+    answer = idx;
+}
+// 물론, 이는 int idx = distance(str.begin(), iter); 대신에
+// int idx = iter - str.begin(); 이걸로 사용해도 된다.
 
 string str2 = str1.substr(2);  // index 2의 위치부터 ~ 끝까지의 문자를 반환함.
 string str2 = str1.substr(2,3);  // index 2의 위치부터 3개의 문자를 반환함.
@@ -228,6 +263,8 @@ cout << v << "\n"; 는 불가능하다는 의미이다.
 erase(v.begin()+1, v.begin()+4); 를 해줌으로써 vector의 1인덱스~3인덱스 요소가 삭제된다.
 즉, 인덱스 1 <= 삭제 < 4 로 마지막은 포함되지 않는다.
 
+벡터에서 iterator방식으로 for문으로 순회할시에, *iter 로 실제값에 접근할 수 있으며, iter - v.begin() 로 인덱스를 구할수있다.
+
 벡터에서 erase 및 insert 함수는 요소의 인덱스를 사용하는 것이 아니라 반복자를 파라미터로 넣어 사용해야 한다.
 
 find와 sort와 reverse함수를 사용하려면 #include <algorithm> 헤더를 작성해둬야한다.
@@ -295,6 +332,18 @@ int max_index = max_element(v.begin(), v.end()) - v.begin();
 // 'max_element(v.begin(), v.end())' - 'v.begin()' 인것이다.
 // 그 이유는 최댓값을 가리키는 반복자와 벡터의 시작 위치를 가리키는 반복자 간의 차를 계산함으로써, 최대 인덱스를 구하는 것이기 때문이다.
 // 참고로 이는 #include <algorithm> 헤더를 작성해야 사용가능하다.
+
+// vector에서는 string처럼, distance함수를 활용하여, iterator에서의 특정 반복자가 가리키는 vector의 실제 인덱스를 구할 수 있다.
+// 사용방법은, distance(v.begin(), iter); 을 활용한다. 이는 첫인덱스부터 찾은반복자 사이의 거리를 이용하여 index를 찾는것이다.
+// 밑은 예시 코드이다.
+vector<int> seoul = { 34,52,12,98 };
+auto iter = find(v.begin(), v.end(), 12);
+if(iter != v.end()) {
+    int idx = distance(v.begin(), iter);  // begin()부터 iter반복자 사이의 거리계산.
+    answer = idx;
+}
+// 물론, 이는 int idx = distance(v.begin(), iter); 대신에
+// int idx = iter - v.begin(); 이걸로 사용해도 된다. (마치 max_index 구할때처럼.)
 
 map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 각 인덱스로 map[i]를 접근하는 방법이 아닌, iterator로 요소에 접근해야한다. 반면 vector은 반복문에서 각 인덱스로도 접근이 가능하다.
 
@@ -421,6 +470,12 @@ set<int> s;
 
 set<int> s = { 1,2,3,4,5 };
 s.insert(4);
+
+set는 배열처럼 s[3] 이런식으로 인덱스로 접근할 수 없다.
+set를 순회하고 싶다면 밑과 같이 해야한다.
+for (set<int>::iterator iter = s.begin(); iter != s.end(); iter++) {
+	cout << *iter << " ";
+}
 
 find시에 find()말고 set1.find() 사용해야하며, 반환값은 인덱스가 아닌 반복자이다.
 
@@ -602,9 +657,11 @@ int solution()
     ss >> result;  // ss에서 맨처음나온 반환값을 result변수에 할당.
 
     char op; int num;
-    while (!ss.eof()) {  // 또는 while(ss >> op >> num) 이렇게 한번에 적어도됨.
+    while (!ss.eof()) {  // 또는 while(ss >> op >> num) 이렇게 한번에 적어도됨. 단, 이문제의경우에선 while(ss >> num >> op)은 에러가난다.
         ss >> op;  // ss에서 나온 반환값중 char 자료형인 값은 op변수에 할당.
         ss >> num;  // ss에서 나온 반환값중 int 자료형인 값은 num변수에 할당.
+	// 단, 위의 할당 순서를 잘 지켜주어야한다. 이문제의경우에선 ss >> num; ss >> op; 이 순서로 진행하면 에러가 난다.
+	// 참고로 ss >> op >> num;로 작성도 가능하다. 단, 이문제의경우에선 ss >> num >> op;은 에러가난다.
 
         if (op == '+') result += num;
         else result -= num;
