@@ -42,6 +42,9 @@ char fiveCh = '5';
 int num1 = zeroCh - '0';  // num1 은 숫자0
 int num2 = fiveCh - '0';  // num2 은 숫자5
 
+// 시프트 연산자
+3 << 4  // 3*2*2*2*2 = 3 * 2^4 = 48
+
 -------------
 
 [ 자료형에 따른 find 종류 및 반환값 설명 ]
@@ -54,7 +57,7 @@ int num2 = fiveCh - '0';  // num2 은 숫자5
 
 < string 에서의 find >
 string str = "TEST";
-str.find("ST");  // 인덱스 반환 (만약 일치하는 값이 없다면, string::npos(== 쓰레기 값)인 4294967295 처럼 반환함.)
+str.find("ST");  // 인덱스 반환 (만약 일치하는 값이 없다면, string::npos(== 쓰레기 값)인 4294967295 처럼 반환함. 근데 듣기론 -1도 될지도모르겠다.)
 str.find("S");  // 인덱스 반환
 find(str.begin(), str.end(), 'S');  // 반복자 반환
 
