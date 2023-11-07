@@ -134,11 +134,15 @@ str.at(0) 은 'E'를 반환.
 두 경우 모두 반환되는 문자는 char형임.
 
 string answer = "";
+answer += "k";  // 문자열 추가도 가능함.
+answer += 'k';  // 문자 추가도 가능함.
 answer += string(n,v);  // 이것처럼 char과는 다르게 string은 문자열을 +로 이을수있으며, (참고로 string(n,v)은 문자 v를 n번 반복한 문자열을 생성함.)
-str1.push_back(chr);  // push_back 메소드도 적용이 가능하다. (단 이것은 한문자만.)
+str1.push_back(chr);  // push_back 메소드도 적용이 가능하다. (단 이것은 한문자만 가능함. 문자열은 적용 불가능함.)
 str1.push_back(str[0]);  // 위와 비슷한 맥락임.
 str1.append(str2);  // str 문자열 맨 뒤에 str2 문자열을 추가함.
+str1.append("k");  // 쌍따옴표의 문자는 문자열로 취급되어 append를 사용 가능함. 단, 문자추가인 str1.append('k'); 는 불가능함.
 // 즉, append는 문자열의 맨 뒤에 추가한다는 점이 push_back과 비슷하지만 차이점이 존재한다. push_back은 "a character" 즉 한 문자만 뒤에 추가할 수 있지만 append는 "characters"로 여러 문자열을 추가 할 수 있다.
+// 즉, string에서 문자를 추가하고싶다면 'push_back()' 또는 '+=' 또는 '쌍따옴표 append("문자")'를 활용하면 된다. 정 헷갈리면 그냥 += 를 활용하자.
 
 string str_a ="7";
 string str_b ="7.02";
