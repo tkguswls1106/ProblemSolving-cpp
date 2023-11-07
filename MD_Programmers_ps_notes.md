@@ -45,6 +45,10 @@ int num2 = fiveCh - '0';  // num2 은 숫자5
 // 시프트 연산자
 3 << 4  // 3*2*2*2*2 = 3 * 2^4 = 48
 
+// 조건과 증감 동시사용 예시
+    for(const auto v : array)
+        answer += (v > height);
+
 -------------
 
 [ 자료형에 따른 find 종류 및 반환값 설명 ]
@@ -324,6 +328,12 @@ vector<int> solution(vector<int> numbers) {
     return answer;
 }
 
+#include <algorithm> 헤더의 count 또는 count_if 함수를 활용하여 원소를 개수를 반환받는 방법이 있다.
+이 함수 사용방법은 #include <algorithm> 헤더의 find, find_if 함수와 사용방법이 유사하다.
+// 밑은 코드 예시이다.
+cout << "원소 num의 개수: " << count(v.begin(), v.end(), num);
+cout << "홀수인 원소의 개수: " << count(v.begin(), v.end(), isOdd);
+
 // 벡터 배열 max 값 구하는법
 int max = *max_element(v.begin(), v.end());
 // 그 이유는 begin과 end는 요소의 값을 반환하는게 아닌 요소를 가리키는것 뿐이기때문인데, 그렇기에 *포인터를 붙여서 벡터에서 최댓값을 가리키는 반복자가 가리키는 값을 반환하는 것이다.
@@ -489,6 +499,13 @@ set에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수
     } else {
         cout << "Element does not exist!" << endl;
     }
+
+위의 s.count() 함수 외에도
+#include <algorithm> 헤더의 count 또는 count_if 함수를 활용하여 원소를 개수를 반환받는 방법도 있다.
+이 함수 사용방법은 #include <algorithm> 헤더의 find, find_if 함수와 사용방법이 유사하다.
+// 밑은 코드 예시이다.
+cout << "원소 num의 개수: " << count(s.begin(), s.end(), num);
+cout << "홀수인 원소의 개수: " << count(s.begin(), s.end(), isOdd);
 
 =======================================
 
