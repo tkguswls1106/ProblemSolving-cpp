@@ -141,7 +141,8 @@ str1.push_back(chr);  // push_back 메소드도 적용이 가능하다. (단 이
 str1.push_back(str[0]);  // 위와 비슷한 맥락임.
 str1.append(str2);  // str 문자열 맨 뒤에 str2 문자열을 추가함.
 str1.append("k");  // 쌍따옴표의 문자는 문자열로 취급되어 append를 사용 가능함. 단, 문자추가인 str1.append('k'); 는 불가능함.
-// 즉, append는 문자열의 맨 뒤에 추가한다는 점이 push_back과 비슷하지만 차이점이 존재한다. push_back은 "a character" 즉 한 문자만 뒤에 추가할 수 있지만 append는 "characters"로 여러 문자열을 추가 할 수 있다.
+// append는 문자열의 맨 뒤에 추가한다는 점이 push_back과 비슷하지만 차이점이 존재한다. push_back은 "a character" 즉 한 문자만 뒤에 추가할 수 있지만 append는 "characters"로 여러 문자열을 추가 할 수 있다.
+// 즉, 문자로 문자열 추가 방식을 사용하려면 "" 쌍따옴표로 나타내서 넣어주면되며, 문자 추가 방식은 '+=', 'push_back()' 이며, 문자열 추가 방식은 '+=', 'append()' 이다.
 // 즉, string에서 문자를 추가하고싶다면 'push_back()' 또는 '+=' 또는 '쌍따옴표 append("문자")'를 활용하면 된다. 정 헷갈리면 그냥 += 를 활용하자.
 
 string str_a ="7";
@@ -336,7 +337,7 @@ vector<int> solution(vector<int> numbers) {
 이 함수 사용방법은 #include <algorithm> 헤더의 find, find_if 함수와 사용방법이 유사하다.
 // 밑은 코드 예시이다.
 cout << "원소 num의 개수: " << count(v.begin(), v.end(), num);
-cout << "홀수인 원소의 개수: " << count(v.begin(), v.end(), isOdd);
+cout << "홀수인 원소의 개수: " << count_if(v.begin(), v.end(), isOdd);
 
 // 벡터 배열 max 값 구하는법
 int max = *max_element(v.begin(), v.end());
@@ -374,6 +375,12 @@ rotate(v.begin(), v.begin() + 1, v.end());  // 1칸씩 왼쪽 이동 => 20 30 40
 rotate(v.begin(), v.begin() + 2, v.end());  // 2칸씩 왼쪽 이동 => 30 40 50 10 20
 rotate(v.begin(), v.end() - 1 , v.end());  // 1칸씩 오른쪽 이동 => 50 10 20 30 40
 rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 10 20 30
+
+// 2차원 벡터 초기화 예시
+    vector<vector<int>> board = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}};
+    int rows = board.size();
+    int cols = board[0].size();
+    vector<vector<int>> result(rows + 2, vector<int>(cols + 2, 0));
 
 =======================================
 
@@ -509,7 +516,7 @@ set에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수
 이 함수 사용방법은 #include <algorithm> 헤더의 find, find_if 함수와 사용방법이 유사하다.
 // 밑은 코드 예시이다.
 cout << "원소 num의 개수: " << count(s.begin(), s.end(), num);
-cout << "홀수인 원소의 개수: " << count(s.begin(), s.end(), isOdd);
+cout << "홀수인 원소의 개수: " << count_if(s.begin(), s.end(), isOdd);
 
 =======================================
 
@@ -709,12 +716,23 @@ sqrt(9)  // 루트 9 = 3
 
 min, max
 #include <algorithm>
-max(value1, value2)
+int maxN = max(value1, value2)  // 참고로 변수명을 max로 해서는 안됨.
 
 영어 소문자,대문자로 변환
 #include <cctype>  // 근데 이거 헤더 선언안해도 잘실행되는듯? 하다.
 ch = tolower(ch);  // 소문자로 변환
 ch = toupper(ch);  // 대문자로 변환
+
+해당 문자가 정수형 문자인지('0'~'9'인 char문자인지) bool 확인
+#include <cctype>
+string str = "ab12cd4e5";
+    for(auto& ch : str)
+    {
+        if(isdigit(ch))  // '0'~'9'인 char문자가 맞다면
+        {
+            // 코드 생략
+        }
+    }
 
 =======================================
 
