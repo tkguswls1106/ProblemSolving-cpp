@@ -30,6 +30,9 @@ static_cast<int>(4.0)
 for문에서 파라미터값으로 증감식 생략을 할 수 있고, 생략하게되면 무한루프에 빠지게된다.
 그래서 위를 응용하자면, 생략후 for문 안에서 if~else문을 이용해서 증감식을 따로 작성해줄수도 있다.
 
+// for문 사용가능 다른 예시
+for(string eng : {"aya", "ye", "woo", "ma"}) { }
+
 // int to char 방법
 int zeroNum = 0;
 int fiveNum = 5;
@@ -382,6 +385,28 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
     int cols = board[0].size();
     vector<vector<int>> result(rows + 2, vector<int>(cols + 2, 0));
 
+-------------
+
+< vector 에서의 커스텀 정렬방법 예시 >
+
+// 문제내용: numlist 배열을 n과 거리가 가까운 숫자를 우선시로 정렬시키고, 만약 거리가 같을경우 큰 숫자를 앞으로 오게함.
+
+bool compare(int prev, int next) {
+    if (abs(prev - num) == abs(next - num))  // 거리가 같을 경우
+        return prev > next;
+        // 숫자가 큰거 다음 작은거 순으로 오게 해라! (거리 오름차순 하면서 거리 동일시, 숫자 내림차순)
+    else  // 거리가 같지않을 경우
+        return abs(prev - num) < abs(next - num);
+        // 거리가 작은거 다음 큰거 순으로 오게 해라! (기본 거리 오름차순)
+        // 참고로 이는 거리가 가까울수록 거리숫자가 작기 때문이다.
+}
+
+vector<int> solution(vector<int> numlist, int n) {
+    num = n;
+    sort(numlist.begin(), numlist.end(), compare);
+    return numlist;
+}
+
 =======================================
 
 < pair 와 vector >
@@ -409,6 +434,46 @@ p2 = make_pair(arr, "vector pair");
         sorted_emergency.push_back({emergency[i], i});  // emergency 배열을 인덱스와 함께 마치 map형식처럼 바꿔서 새로 만듦.
     }
     sort(sorted_emergency.rbegin(), sorted_emergency.rend());
+
+-------------
+
+< pair 에서의 first,second 커스텀 정렬방법 예시 >
+
+// pair에서의 first 오름차순과 second 내림차순 정렬해주는 함수
+bool compare(const pair<int, int> &a, const pair<int, int> &b)  // 아마도 const랑 &는 빼도 되는듯 하다.
+{
+    if (a.first == b.first)  // 만약 first 값이 같다면,
+    {
+        return a.second > b.second;
+        // second가 큰거 다음 작은거 순으로 오게 해라! (first 오름차순 하면서 first 동일시, second 내림차순)
+    }
+    else  // 만약 first 값이 같지 않다면,
+    {
+        return a.first < b.first;
+        // first가 작은거 다음 큰거 순으로 오게 해라! (기본 first 오름차순)
+    }
+}
+
+int main()
+{
+    vector<pair<int, int> > v;
+    v.push_back(make_pair(1, 2));
+    v.push_back(make_pair(1, 0));
+    v.push_back(make_pair(2, 0));
+    v.push_back(make_pair(2, 2));
+ 
+    sort(v.begin(), v.end(), compare);
+    for (int i = 0; i < 4; ++i)
+    {
+        cout << v[i].first << " " << v[i].second << "\n";
+    }
+}
+
+// 밑은 출력 결과
+1 2
+1 0
+2 2
+2 0
 
 =======================================
 
