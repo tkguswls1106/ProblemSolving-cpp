@@ -52,6 +52,11 @@ int num2 = fiveCh - '0';  // num2 은 숫자5
     for(const auto v : array)
         answer += (v > height);
 
+// 배열이 빈경우 -1을 하나 채워 반환하는법 예시
+if(arr.empty()) {
+    return vector<int>(1, -1);  // return { -1 }; 도 가능함.
+}
+
 -------------
 
 [ 자료형에 따른 find 종류 및 반환값 설명 ]
@@ -133,7 +138,7 @@ reverse(str.begin(), str.end());
 
 string str = "TEST"; 일 때
 str[0] 은 'T'를 반환. 
-str.at(0) 은 'E'를 반환.
+str.at(1) 은 'E'를 반환.
 두 경우 모두 반환되는 문자는 char형임.
 
 string answer = "";
@@ -153,6 +158,7 @@ string str_b ="7.02";
 string str_c ="3.14";
 string str_d = "2300000000";
 // 참고로 stoi 이런건 sto + int 이런 뜻이다. 정확히는 stod는 's'tring + 'to' + 'd'ouble, stof는 's'tring 'to' 'f'loat
+// 그리고 stoi 이런건 문자열 앞의 -부호 처리도 알아서 변환해주니 바로 사용하면된다.
 int after_a = stoi(str_a);  // "7"을 int형 7로 바꿔줌.
 double after_b = stod(str_b);  // "7.02"를 double형 7.02로 바꿔줌.
 float after_c = stof(str_c);  // "3.14"를 float형 3.14로 바꿔줌.
@@ -778,6 +784,10 @@ double sum = accumulate(v.begin(), v.end(), 0.0);
 #include <cmath>
 pow(10, 2)  // 10의 2제곱 = 100
 sqrt(9)  // 루트 9 = 3
+// 참고로 powf, powl 이라는것도 있다.
+// double pow(double x, double y);
+// float powf(float x, float y);
+// long double powl(long double x, long double y);
 
 min, max
 #include <algorithm>
