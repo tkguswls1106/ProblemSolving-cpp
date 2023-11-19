@@ -389,7 +389,7 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
     vector<vector<int>> board = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}};
     int rows = board.size();
     int cols = board[0].size();
-    vector<vector<int>> result(rows + 2, vector<int>(cols + 2, 0));
+    vector<vector<int>> result(rows, vector<int>(cols, 0));
 
 -------------
 
