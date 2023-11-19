@@ -395,7 +395,7 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
 
 < vector 에서의 커스텀 정렬방법 예시 >
 
-// 문제내용: numlist 배열을 n과 거리가 가까운 숫자를 우선시로 정렬시키고, 만약 거리가 같을경우 큰 숫자를 앞으로 오게함.
+// 문제내용: numlist 배열(벡터)을 n과 거리가 가까운 숫자를 우선시로 정렬시키고, 만약 거리가 같을경우 큰 숫자를 앞으로 오게함.
 
 bool compare(int prev, int next) {
     if (abs(prev - num) == abs(next - num))  // 거리가 같을 경우
@@ -411,6 +411,38 @@ vector<int> solution(vector<int> numlist, int n) {
     num = n;
     sort(numlist.begin(), numlist.end(), compare);
     return numlist;
+}
+
+-------------
+
+< vector 에서의 커스텀 정렬방법 + 전역변수 사용 예시 >
+
+// 문제내용: 문자열들이 들어있는 strings 벡터를 각 문자열의 인덱스n을 기준으로 우선시로 오름차순 정렬시키고, 만약 인덱스n의 알파벳이 같을경우 사전순으로 문자열을 오름차순 정렬시킴.
+
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int idx;
+
+bool compare(string a, string b) {
+    if (a[idx] == b[idx]) {  // 1차 동일시 2차 비교: 문자열 오름차순 정렬
+        return a < b;
+    }
+    else {
+        return a[idx] < b[idx];  // 1차 비교: 인덱스 문자 기준 오름차순 정렬
+    }
+}
+
+vector<string> solution(vector<string> strings, int n) {
+    
+    idx = n;
+    
+    sort(strings.begin(), strings.end(), compare);
+    
+    return strings;
 }
 
 =======================================
