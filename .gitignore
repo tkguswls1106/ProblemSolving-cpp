@@ -1,5 +1,22 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+
+###############################
+
+
 Icon?
 .DS_Store
+.vscode
+
+
+###############################
 
 
 ## Ignore Visual Studio temporary files, build results, and
