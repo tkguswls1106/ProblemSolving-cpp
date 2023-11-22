@@ -393,6 +393,10 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
     int cols = board[0].size();
     vector<vector<int>> result(rows, vector<int>(cols, 0));
 
+// swap 예시
+swap(v[2], v[4]);
+iter_swap(v.begin()+2, v.begin()+4);
+
 -------------
 
 < vector 에서의 커스텀 정렬방법 예시 >
