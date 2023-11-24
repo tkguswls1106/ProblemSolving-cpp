@@ -19,6 +19,7 @@ cin.tie(0);
 '9'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48+9=57이다.
 'A'의 ASCII 값은 알파벳 'A'의 정수 표현이다. ASCII 값으로는 65이다.
 'a'의 ASCII 값은 알파벳 'a'의 정수 표현이다. ASCII 값으로는 97이다.
+알파벳은 총 26개이다.
 
 C++ 스타일의 형변환 방법은
 int(4.0)
@@ -127,6 +128,27 @@ unique 또한 위의 remove처럼 erase 함수를 추가적으로 이용해야�
 v.erase(unique(v.begin(), v.end()), v.end());
 이처럼 사용한다.
 
+< 반복문 내에서 erase를 사용하는 팁 예시코드 >
+// 밑은 주어진 문자열 value에서 '.'가 연속2번이상 반복되는 부분들을 모두 '.' 하나씩으로 변경하는 함수를 작성해본것이다.
+string ReplaceDot(string value)
+{
+    string result = value;
+
+    int i = 0;
+    while(true)
+    {
+        if(i == result.size()-1)
+            break;
+
+        if(result[i] == '.' && result[i+1] == '.')
+            result.erase(i, 1);
+        else
+            i++;
+    }
+
+    return result;
+}
+
 =======================================
 
 < string >
@@ -207,6 +229,7 @@ string str2 = str1.substr(2,3);  // index 2의 위치부터 3개의 문자를 �
 
 str.insert(2,"bbb");  // index가 2인 위치에 있는 문자 앞에 삽입함.
 
+// replace는 문자말고 문자열로 대체한다. 만약 문자로 대체하고 싶다면, 문자에 쌍따옴표""를 넣어 사용하면 된다.
 str.replace(2,3,"bbb");  // index가 2인 위치에 있는 문자부터 ~ 3개의 문자를 "bbb"로 대체함.
 // 위의 변환 내용은 aaaaaaaa -> aabbbaaa
 str.replace(2,4,"bbb");  // index가 2인 위치에 있는 문자부터 ~ 4개의 문자를 "bbb"로 대체함.
@@ -453,7 +476,7 @@ vector<string> solution(vector<string> strings, int n) {
 
 =======================================
 
-< pair 와 vector >
+< pair >
 
 pair는 2개를 묶어주는 구조체이다.
 pair은 utility 헤더에 존재하며, 프로그래머스에서는 아마 vector 헤더로 대체 가능한듯 하다.
@@ -465,8 +488,47 @@ pair끼리 비교도 가능하다. pair끼리 비교를 하면 first를 기준�
 pair.first와 pair.second 이런식으로 접근한다.
 sort() 역시 사용이 가능하며 sort도 first를 기준으로 먼저, 그 다음 second를 기준으로 정렬을 한다.
 
+pair과 map의 for문 관련해서 화살표와 온점 사용방식을 따로 밑쪽 부분에 작성해두었다.
+
 pair<pair<string, int>, string> p1;
 p1 = make_pair(make_pair("first string",2), "second string");
+
+-------------
+
+< for문에서의 pair와 map 요소 접근 방법 >
+
+pair 객체는 온점 방식으로 접근해야한다.
+map은 안의 요소가 pair객체로 이루어져있다는것을 명심해야한다.
+그렇기에 map을 :요소접근 for문으로 접근할시에는 pair객체가 되어 온점을 사용해야하는것이다.
+iterator반복자는 반복자이기에 화살표 방식으로 접근해야한다. 반복자가 아닌 :요소접근 방식처럼 접근하고싶다면, (*iter) 처럼 만들어서 pair 객체제 직접 접근할수있도록 만들어주면된다.
+
+map<int, int> map1;
+
+map1을 iterator반복자 for문으로 접근할시,
+iter->first 처럼 화살표만 가능하다. 온점인 iter.first 는 불가능하다.
+단, (*iter).first 처럼 반복자를 직접 map안의 pair요소에 접근하는 방식으로 바꿔준다면 온점으로 사용가능하다.
+    for (auto iter = map1.begin(); iter != map1.end(); iter++)
+    {
+        cout << iter->first << ", " << iter->second << "\n";  // 화살표 방식만 가능.
+        cout << (*iter).first << ", " << (*iter).second << "\n";  // 이렇게하면 반복자로도 온점 방식으로 사용 가능.
+    }
+
+map1을 :요소접근 for문으로 접근할시,
+p.first 처럼 온점만 가능하다. 화살표인 p->first 는 불가능하다.
+    for (auto p : map1)
+    {
+        cout << p.first << ", " << p.second << "\n";  // 온점 방식만 가능.
+    }
+
+즉, pair와 map의 접근방식을 요약 정리하자면
+pair은 온점 방식만 사용하자.  // a.first
+map은 for문에서 iterator반복자 접근시, 화살표 방식만 사용하자.  // iter->first
+map은 for문에서 iterator반복자 접근시, 포인터를 활용한다면 온점 방식만 사용하자.  // (*iter).first
+map은 for문에서 :요소접근으로 접근시, 온점 방식만 사용하자.  // p.first
+
+-------------
+
+< pair 와 vector >
 
 pair<vector<int>, string> p2;
 vector<int> arr = { 1,3,5 };
@@ -551,7 +613,10 @@ map으로 반복문을 사용할때는 반복문 소괄호 매개변수 안에 �
 map의 원소는 pair 객체로 저장되며,
 pair 객체의 first 멤버 변수는 key로 second 멤버 변수는 value이다.
 for (iter = m.begin(); iter != m.end(); iter++) { } 에서
-key는 iter->first, value는 iter->second 이다. 아마도 iter.first 이런식으로도 가능한듯하다.
+key는 iter->first, value는 iter->second 이다.
+하지만 for(auto keyvalue : m) 이런식의 for문인 경우에는 ->말고 .으로 사용하여 keyvalue.first 이런식으로만 사용해야한다.
+
+map과 pair의 for문 관련해서 화살표와 온점 사용방식을 따로 위쪽인 pair파트쪽에 작성해두었다.
 
 사용자가 map객체에 주어진 값의 쌍이 있는지 확인해야하는 경우 멤버 함수 count를 사용할 수 있다.
 map에 키가 있으면 맵 컨테이너의 모든 키가 고유하므로 개수는 정확히 1이 된다. 반면에 키를 찾을 수 없으면 count 함수는 0을 반환한다.
