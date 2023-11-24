@@ -1,6 +1,7 @@
 # [프로그래머스 알고리즘 C++ 정리 노트 / ps(problem solving) 필기]
 
-**코딩테스트 입문 100문제: https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc&languages=cpp**
+**- 코딩테스트 입문 100문제 (C++):<br>https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc&languages=cpp**<br>
+**- 코딩테스트 모든 문제 (C++, 안 푼 문제):<br>https://school.programmers.co.kr/learn/challenges?order=acceptance_desc&languages=cpp&page=1&statuses=unsolved**
 ```
 #include <bits/stdc++.h>
 
