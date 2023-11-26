@@ -1,8 +1,11 @@
 #include <vector>
 #include <queue>
 #include <iostream>
+#include <algorithm>  // max함수 사용을 위해 작성하였음.
 
 using namespace std;
+
+// [ BFS 너비 우선 탐색 - 백준 1926 문제 ]
 
 int n, m;  // 행(가로), 열(세로)
 vector<vector<int>> board;  // 그래프값 입력받은 배열
@@ -22,7 +25,7 @@ void bfs(int x, int y) {
     queue<pair<int, int>> qu;  // 방문한 좌표들을 담을 큐
     int areaSum = 0;  // 넓이 재는 변수
 
-    qu.push({ x, y });  // 방문한 좌표 큐에 추가.
+    qu.push({ x, y });  // 방문한 첫좌표 큐에 추가.
     visited[x][y] = 1;  // 방문했다고 체크. (큐에서 pop으로 뺄때 체크하면 안됨. push으로 넣을때 체크해야함.)
     areaSum++;  // 첫좌표에 방문성공했으니 넓이++
 
@@ -40,19 +43,19 @@ void bfs(int x, int y) {
                 continue;
             }
 
-            // 맨위 조건문과 같은 형태이자 같은 사용 이유임.
+            // bfs함수 맨위 조건문과 같은 형태이자 같은 사용 이유임.
             if(board[nx][ny] == 0 || visited[nx][ny] == 1) {
-                continue;  // 이는 저 위의 return;과는 달리, 함수에서 빠져나올것이 아니라 for문의 다음좌표로 확인순서를 넘겨버려 제외시키기 위함임.
+                continue;  // 이는 저 위의 return;과는 달리, 함수에서 빠져나올것이 아니라 for문의 다음좌표로 확인순서를 넘겨버려 제외시키기 위함임. 또한 밑코드는 실행안되게됨.
             }
 
-            qu.push({ nx, ny });
-            visited[nx][ny] = 1;
+            qu.push({ nx, ny });  // 방문한 좌표 큐에 추가.
+            visited[nx][ny] = 1;  // 방문했다고 체크.
             areaSum++;  // 첫좌표 이후의 좌표들에 방문성공한만큼 반복문으로 계속 넓이++
         }
     }
 
     cnt++;  // 그림개수 추가.
-    maxArea = areaSum > maxArea ? areaSum : maxArea;  // 최대그림넓이 새로고침. 이는 maxArea = max(maxArea, areaSum); 함수 사용으로도 대체 가능한 코드줄이다.
+    maxArea = max(maxArea, areaSum);  // 최대그림넓이 새로고침. 이는 'maxArea = areaSum > maxArea ? areaSum : maxArea;' 로도 대체 가능한 코드줄이다.
 }
 
 int main()
