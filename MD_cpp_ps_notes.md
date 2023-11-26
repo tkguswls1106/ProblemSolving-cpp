@@ -432,6 +432,16 @@ rotate(v.begin(), v.end() - 2 , v.end());  // 2칸씩 오른쪽 이동 => 40 50 
     int cols = board[0].size();
     vector<vector<int>> result(rows, vector<int>(cols, 0));
 
+// 할당없이 이미 선언만된 2차원 벡터 가변 크기 설정 예시
+vector<vector<int>> v;
+int n=2, m=3;
+v.resize(n, vector<int>(m));  // (m,0)방식으로도 사용가능.
+
+// 할당없이 이미 선언만된 1차원 벡터 가변 크기 설정 예시
+vector<int> v;
+int n=2
+v.resize(n);  // (n,0)방식으로도 사용가능.
+
 // swap 예시
 swap(v[2], v[4]);
 iter_swap(v.begin()+2, v.begin()+4);
@@ -545,7 +555,7 @@ p.first 처럼 온점만 가능하다. 화살표인 p->first 는 불가능하다
 즉, pair와 map의 접근방식을 요약 정리하자면
 pair은 온점 방식만 사용하자.  // a.first
 map은 for문에서 iterator반복자 접근시, 화살표 방식만 사용하자.  // iter->first
-map은 for문에서 iterator반복자 접근시, 포인터를 활용한다면 온점 방식만 사용하자.  // (*iter).first
+map은 for문에서 iterator반복자 접근시 포인터를 활용한다면, 온점 방식만 사용하자.  // (*iter).first
 map은 for문에서 :요소접근으로 접근시, 온점 방식만 사용하자.  // p.first
 
 -------------

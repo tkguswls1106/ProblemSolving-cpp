@@ -12,7 +12,7 @@ int main()
     // 큐 선언
     queue<int> qu;
 
-    // 추가
+    // 뒤로 추가
     qu.push(1); // 앞 1 뒤
     qu.push(2); // 1 2
     qu.push(3); // 1 2 3
