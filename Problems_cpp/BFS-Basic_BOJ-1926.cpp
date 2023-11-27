@@ -8,7 +8,7 @@ using namespace std;
 // [ BFS 너비 우선 탐색 - 백준 1926 문제 ]
 // bfs함수 전체적인 과정 설명:
 // 첫좌표 먼저 큐에 push넣어주고 방문 1체크
-// -> while문(큐가 모두 비워지기전까지 큐를 pop하며 해당 좌표의 주변인 상하좌우를 확인. 그 후 조건에 맞다면 해당 주변좌표를 큐에 push해주고 방문 1체크. 이를 반복.)
+// -> while문(큐가 모두 비워지기전까지를 조건으로, 큐를 pop하며 해당 좌표의 주변인 상하좌우를 확인. 그 후 조건에 맞다면 해당 주변좌표를 큐에 push해주고 방문 1체크. 이를 반복.)
 
 int n, m;  // 행(가로), 열(세로)
 vector<vector<int>> board;  // 그래프값 입력받은 배열
@@ -41,7 +41,7 @@ void bfs(int x, int y) {
             int nx = cur.first + dx[i];
             int ny = cur.second + dy[i];
 
-            // 이 조건문을 다른조건문보다 먼저 작성해줘야, 나중에 인덱스 접근할때 segmentation falut 에러가 안남.
+            // 이 조건문을 다른조건문보다 먼저 작성해줘야, 나중에 인덱스 접근할때 segmentation fault 에러가 안남.
             if(nx < 0 || n <= nx || ny < 0 || m <= ny) {
                 continue;
             }
