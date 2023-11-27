@@ -30,7 +30,7 @@ void bfs(int x, int y) {
             if(board[nx][ny] == 0 || dist[nx][ny] > 0) continue;
 
             qu.push({nx,ny});
-            dist[nx][ny] = dist[cur.first][cur.second] + 1;
+            dist[nx][ny] = dist[cur.first][cur.second] + 1;  // 주변좌표의 거리값 = 기준좌표 거리값 + 1;
         }
     }
 }
@@ -52,9 +52,7 @@ int main()
         }
     }
 
-    for (int i = 0; i<n; i++)
-        for (int j = 0; j<m; j++)
-            bfs(i, j);
+    bfs(0, 0);  // 이 문제의 경우에는, 어차피 미로로 쭉 경로가 끊기지않고 이어져있으므로 bfs함수를 for문으로 여러번 호출해줄필요가 없다.
 
     cout << dist[n-1][m-1];
 

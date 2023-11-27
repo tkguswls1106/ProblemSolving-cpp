@@ -53,6 +53,8 @@ int num2 = fiveCh - '0';  // num2 은 숫자5
 // 시프트 연산자
 3 << 4  // 3*2*2*2*2 = 3 * 2^4 = 48
 
+bool의 기본 초기값은 false 이다.
+
 // 조건과 증감 동시사용 예시
     for(const auto v : array)
         answer += (v > height);
