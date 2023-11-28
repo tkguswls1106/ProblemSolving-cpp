@@ -64,7 +64,12 @@ if(arr.empty()) {
     return vector<int>(1, -1);  // return { -1 }; 도 가능함.
 }
 
+전역변수로 선언한 int나 int 배열array은 따로 초기화를 안하면 0이 채워진다.
+
 특정 범위내의 소수를 판별할때에는 '에라토스테네스의 체' 알고리즘을 사용하는것이 좋다. 관련 자세한 설명은 PrimeNumber-Eratos.cpp 파일에 작성해두었다.
+
+보통 3차원 배열을 순회할때는 for문 변수 순서가 높이z,행x,열y가 된다. 순서를 주의하자.
+2차원은 평소처럼 행x,열y 순서로 해주면 된다.
 
 -------------
 
@@ -512,7 +517,7 @@ vector<string> solution(vector<string> strings, int n) {
 
 < pair >
 
-pair는 2개를 묶어주는 구조체이다.
+pair는 2개를 묶어주는 구조체이다. (3개 이상을 묶고싶다면, tuple을 사용하자.)
 pair은 utility 헤더에 존재하며, 프로그래머스에서는 아마 vector 헤더로 대체 가능한듯 하다.
 
 마치 map과 비슷하다. 단, pair은 map과 다른 점이라면 key값이 중복될 수 있다. 반면 map은 key값이 중복될 수 없다.
@@ -521,6 +526,11 @@ make_pair(1,2) 이것과 {1,2}는 같은 맥락이다.
 pair끼리 비교도 가능하다. pair끼리 비교를 하면 first를 기준으로 먼저 비교를 하게 된다. first가 같다면 second를 비교하게 된다.
 pair.first와 pair.second 이런식으로 접근한다.
 sort() 역시 사용이 가능하며 sort도 first를 기준으로 먼저, 그 다음 second를 기준으로 정렬을 한다.
+
+// pair 초기화 방법들 예시
+pair<int,int> p = {6,7};
+pair<int,int> p = make_pair(6,7);
+pair<int,int> p = pair<int,int>(6,7);
 
 pair과 map의 for문 관련해서 화살표와 온점 사용방식을 따로 밑쪽 부분에 작성해두었다.
 
@@ -614,6 +624,45 @@ int main()
 1 0
 2 2
 2 0
+
+=======================================
+
+< tuple >
+
+#include <tuple> 헤더를 선언해야한다.
+
+tuple은 pair와 비슷하지만 2개보다 더 많은 데이터를 묶을 수 있다. (2개 이상이므로, pair처럼 2개도 가능하긴함.)
+tuple은 여러개를 묶을수 있기에,
+보통 2개의 데이터를 묶을 때는 std::pair을 사용하고, 3개 이상이면 std::tuple를 사용한다.
+함수의 반환값으로 3개 이상의 값을 반환하고자 할때에도 사용하면 좋다.
+
+tuple의 요소접근은, tuple의 인덱스에 접근할 때 get<> 사이에 변수를 넣을 수 없다.
+예시로 for (int i=0; i<3; i++) cout << get<i>(t) << "\n"; 는 사용불가능하다는 것이다.
+일일이 get<0>(t1) 이런식으로 불러줘야한다.
+
+// tuple 초기화 방법들 예시
+tuple<int,int,int> t = {6,7,8};
+tuple<int,int,int> t = make_tuple(6,7,8);
+tuple<int,int,int> t = tuple<int,int,int>(6,7,8);
+
+// 튜플 사용 예시코드
+int main(){
+    tuple<int, string, int> t1 = make_tuple(10, "hi", 30);  // = { 10, "hi", 30 }; 으로 할당도 가능.
+    cout << get<0>(t1) << "\n";  // 10 출력
+    cout << get<1>(t1) << "\n";  // hi 출력
+    cout << get<2>(t1) << "\n";  // 30 출력
+    // 만약 tuple 크기가 4개였다면, get<3>(t1)도 가능함.
+
+    get<2>(t1) = 90;
+    cout << get<2>(t1) << "\n";  // 90 출력
+
+    int x, z;
+    string y;
+    tie(x, y, z) = t1;  // 튜플의 값을 가져와서 한번에 변수에 할당.
+    cout << x << "\n";  // 10 출력
+    cout << y << "\n";  // hi 출력
+    cout << z << "\n";  // 90 출력
+}
 
 =======================================
 

@@ -1,3 +1,5 @@
+// - BFS 2차원 토마토 문제 -
+
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -5,16 +7,20 @@
 
 using namespace std;
 
+// - 풀이순서 팁 설명:
+// 처음에 이미 익어있는 토마토를 큐에 넣어준상태로 시작하며, 처음에 안익어있던 토마토는 유별나게 티날수있게 따로 day를 -1로 설정해두고 시작하기.
+
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
 
-int m,n;
+int m,n;  // m: 열(세로 => 세로줄 개수 = '가로 길이'), n: 행(가로 => 가로줄 개수 = '세로 길이')
 vector<vector<int>> board;
 vector<vector<int>> dayV;
 
 queue<pair<int, int>> qu;  // 이 문제의 경우, 처음에 이미 익어있는 토마토의 좌표들을 먼저 큐에 넣어주고 시작해야하므로, 큐를 전역변수로 선언한다.
 
 void bfs() {
+    // 이미 시작 익은토마토들을 메인함수에서 bfs호출전에 큐에 모두 넣어두었고 for문 없이 이를 활용하기때문에, 초반에 bfs함수의 파라미터로 x,y좌표변수를 받아 if조건문으로 걸러주는 코드줄은 필요가 없다.
 
     while(!qu.empty()) {
         pair<int, int> cur = qu.front();
@@ -42,7 +48,6 @@ int main()
     board.resize(n, vector<int>(m));
     dayV.resize(n, vector<int>(m));
 
-    bool already = true;  // 처음부터 모든 토마토가 이미 익어있는 상태인지 (처음 board값이 0이 하나라도 존재하지않아야함.)
     for(int i=0; i<n; i++) {  // 행 n
         for(int j=0; j<m; j++) {  // 열 m
             cin >> board[i][j];

@@ -1,3 +1,5 @@
+// - BFS 2차원 토마토 문제 -
+
 // < 시간초과 FAIL 코드 >
 // - 놓쳤던 부분:
 // 답은 맞게나옴. 하지만 시간초과가 나는 이유는, 나는 처음 이미 익어있던 토마토를 시작점으로 또 for문으로 돌려 bfs함수를 호출했기 때문이다.
@@ -17,7 +19,7 @@ using namespace std;
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
 
-int m,n;
+int m,n;  // m: 열(세로 => 세로줄 개수 = '가로 길이'), n: 행(가로 => 가로줄 개수 = '세로 길이')
 vector<vector<int>> board;
 vector<vector<int>> dayV;
 

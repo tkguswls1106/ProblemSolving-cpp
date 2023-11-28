@@ -1,3 +1,5 @@
+// - BFS 그림(2차원) 문제 -
+
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -12,7 +14,7 @@ using namespace std;
 // - 시간복잡도 설명:
 // 방문했던점이 아닌지 즉 시작점으로 사용가능한지 방문체크를 통하여, 총 모든 칸수만큼만 큐에 한번씩만 들어갔다 나오면 된다. 그러므로 bfs의 시간복잡도는 칸수만큼인 n*m으로 O(n*m)이 된다.
 
-int n, m;  // 행(가로), 열(세로)
+int n, m;  // n: 행(가로 => 가로줄 개수 = '세로 길이'), m: 열(세로 => 세로줄 개수 = '가로 길이')
 vector<vector<int>> board;  // 그래프값 입력받은 배열
 vector<vector<int>> visited;  // 방문했는지 체크할 배열 0 or 1
 

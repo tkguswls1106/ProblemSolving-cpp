@@ -1,3 +1,5 @@
+// - BFS 2차원 토마토 문제 -
+
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -8,13 +10,14 @@ using namespace std;
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
 
-int m,n;
+int m,n;  // m: 열(세로 => 세로줄 개수 = '가로 길이'), n: 행(가로 => 가로줄 개수 = '세로 길이')
 vector<vector<int>> board;
 vector<vector<int>> dayV;
 
 queue<pair<int, int>> qu;  // 이 문제의 경우, 처음에 이미 익어있는 토마토의 좌표들을 먼저 큐에 넣어주고 시작해야하므로, 큐를 전역변수로 선언한다.
 
 void bfs() {
+    // 이미 시작 익은토마토들을 메인함수에서 bfs호출전에 큐에 모두 넣어두었고 for문 없이 이를 활용하기때문에, 초반에 bfs함수의 파라미터로 x,y좌표변수를 받아 if조건문으로 걸러주는 코드줄은 필요가 없다.
 
     while(!qu.empty()) {
         pair<int, int> cur = qu.front();
