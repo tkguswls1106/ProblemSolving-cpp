@@ -1,4 +1,5 @@
-// - BFS 그림(2차원) 문제 -
+// - BFS 그림(2차원) 문제 (Flood Fill) -
+// 참고로 이 문제는 DFS로도 풀 수 있음. 난 처음에 BFS로 풀었었음.
 
 #include <vector>
 #include <queue>
