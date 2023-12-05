@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// BFS처럼 안보일 수 있는 문제이지만, 이는 BFS 1차원 배열 문제이다.
+
 int n,k;
 int cnt[100002] = { 0, };  // 시간초 카운트 배열
 
