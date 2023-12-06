@@ -15,6 +15,7 @@ cout << num << '\n';
 
 ios::sync_with_stdio(0);
 cin.tie(0);
+cout.tie(0);
 
 '0'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48이다.
 '9'의 ASCII 값은 숫자 0의 정수 표현이다. ASCII 값으로는 48+9=57이다.
