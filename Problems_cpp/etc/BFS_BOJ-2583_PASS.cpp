@@ -1,3 +1,7 @@
+// < 아쉬운 PASS 코드 >
+// - 놓쳤던 부분:
+// 이 코드처럼 굳이 모눈종이를 그래프 방식으로 변환하여 복잡하게 푸는방식으로 작성하지 않고, 있는 그대로 풀어도 괜찮았다.
+
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -11,7 +15,7 @@ using namespace std;
 // 위의 예시설명: 모눈종이의 왼쪽아래꼭짓점좌표 오른쪽위꼭짓점좌표 (0,2) (4,4) -> 그래프상의 왼쪽아래꼭짓점좌표 오른쪽위꼭짓점좌표 위치좌표 (0,2) (3,3) {물론, x,y좌표는 그래프에서 교체해야함.}
 
 vector<vector<int>> board;
-vector<vector<int>> visited;
+vector<vector<int>> visited;  // 헷갈릴수있겠지만 이 문제는 dist보단 visited로 코드를 짜는것이 더 적합하다.)
 queue<pair<int,int>> qu;
 
 int dx[4] = {1,0,-1,0};
@@ -19,7 +23,7 @@ int dy[4] = {0,1,0,-1};
 
 int m,n,k;
 
-int cnt;
+int cnt = 0;
 vector<int> areaV;
 void bfs(int x, int y) {
     if(board[x][y] == 1 || visited[x][y] == 1) return;
@@ -66,7 +70,7 @@ int main()
         if(a >= n) a = n-1;
         if(b >= m) b = m-1;
 
-        for(int q=a; q<=c; q++) {
+        for(int q=a; q<=c; q++) {  // 주석처럼 --해서 그래프방식으로 변환해서 문제를 풀고있으므로, 부등호를 <가 아닌 <=로 작성해야한다.
             for(int w=b; w<=d; w++) {
                 board[q][w] = 1;
             }

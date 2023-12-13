@@ -17,7 +17,7 @@ using namespace std;
 
 int n, m;  // n: 행(가로 => 가로줄 개수 = '세로 길이'), m: 열(세로 => 세로줄 개수 = '가로 길이')
 vector<vector<int>> board;  // 그래프값 입력받은 배열
-vector<vector<int>> visited;  // 방문했는지 체크할 배열 0 or 1
+vector<vector<int>> visited;  // 방문했는지 체크할 배열 0 or 1 (헷갈릴수있겠지만 이 문제는 dist보단 visited로 코드를 짜는것이 더 적합하다.)
 
 // 상하좌우 둘러보기위해 기존 (x,y)좌표에다가, (1,0),(0,1),(-1,0),(0,-1)씩 더해주기위한 배열임.
 // 정확히는 밑의 순서는 '아랫쪽, 오른쪽, 윗쪽, 왼쪽' 이다.
