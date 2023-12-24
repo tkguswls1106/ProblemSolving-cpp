@@ -26,7 +26,7 @@ void func(int k) {  // k = 현재 이미 골라서 저장되어있는 개수
 
         v.push_back(i);
         visited[i] = 1;
-        func(k+1);
+        func(k+1);  // 어차피 처음 시작할때 k=0부터 파라미터를 넣어주었기때문에, 만약 k+1이 m과 같아진다면 이외 코드실행없이 바로 출력이되고 return;이 실행되며 최근 재귀가 종료된다.
 
         v.pop_back();
         visited[i] = 0;
