@@ -1,3 +1,7 @@
+// 이와 비슷하지만 보다 괜찮은 풀이는 다음 웹사이트 링크를 참고하자.
+// 참고로 다음 링크 코드의 tmp배열은 arr배열을 dir반복문마다 재초기화해서 원래값으로 원상복구시켜줄 임시 배열을 의미한다.
+// https://0m1n.tistory.com/115
+
 #include <vector>
 #include <queue>
 #include <tuple>
