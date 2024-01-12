@@ -64,7 +64,7 @@ void left(vector<vector<int>>& boardTmp) {  // 왼쪽 방향에서 기울이기
 	}
 }
 
-void rotateNleft(vector<vector<int>>& boardTmp, int rotateCnt) {  // 90도 회전을 1~4 원하는횟수만큼 진행 후에, 기울기 실시.
+void rotateNleft(vector<vector<int>>& boardTmp, int rotateCnt) {  // 90도 회전을 1~4 원하는횟수만큼 진행 후에, 기울기 실시. (이동)
 	while(rotateCnt--) {
 		rotate(boardTmp);
 	}
