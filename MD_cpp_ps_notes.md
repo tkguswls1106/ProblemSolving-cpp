@@ -1030,6 +1030,7 @@ min, max
 #include <algorithm>
 int maxN = max(value1, value2);  // 참고로 변수명을 max로 해서는 안됨.
 int maxN = max({value1, value2, value3});  // 참고로 변수명을 max로 해서는 안됨.
+// 꿀팁으로, minVlaue = 1e9 와 maxValue = -1 이런식으로 선언해두고 비교해나가는게 좋다.
 
 영어 소문자,대문자로 변환
 #include <cctype>  // 근데 이거 헤더 선언안해도 잘실행되는듯? 하다.
