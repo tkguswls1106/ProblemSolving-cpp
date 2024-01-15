@@ -32,7 +32,7 @@ int main()
 
     while(true) {
         if(!a.empty() && !b.empty()) {
-            if(a.front() < b.front()) {
+            if(a.front() <= b.front()) {  // Stable Sort 성질때문에 기왕이면 <가 아닌, <=로 작성하는것이 더 좋다.
                 resultV.push_back(a.front());
                 a.pop_front();
             }
