@@ -397,6 +397,7 @@ reverse(v.begin(), v.end());
 // 오름차순 정렬. 참고로 v는 벡터 변수명임.
 sort(v.begin(), v.end());
 sort(v.begin(), v.end(), less<int>());
+// 참고로 v벡터가 아니라 arr배열인경우(길이5짜리), sort(arr, arr+5);
 
 // 내림차순 정렬
 sort(v.rbegin(), v.rend());	
@@ -548,6 +549,9 @@ using namespace std;
 int idx;
 
 bool compare(string a, string b) {
+// const랑 &는 빼도 되긴 하다. 하지만 이처럼 string 이나 pair<int, int> 같은 STL 혹은 클래스 객체를 파라미터 전달시에는
+// const랑 &를 붙여서 참조시켜주는것이 복사해서 비교하는것을 막아서 불필요한 연산을 막고 시간을 단축시켜 보다 효율적이다.
+// 하지만 const는 코딩테스트에서 딱히 불필요하기에, 결론적으로말하자면 &만 붙여줘도 좋다.
     if (a[idx] == b[idx]) {  // 1차 동일시 2차 비교: 문자열 오름차순 정렬
         return a < b;
     }
@@ -642,7 +646,10 @@ p2 = make_pair(arr, "vector pair");
 < pair 에서의 first,second 커스텀 정렬방법 예시 >
 
 // pair에서의 first 오름차순과 second 내림차순 정렬해주는 함수
-bool compare(const pair<int, int> &a, const pair<int, int> &b)  // 아마도 const랑 &는 빼도 되는듯 하다.
+bool compare(const pair<int, int>& a, const pair<int, int>& b)
+// const랑 &는 빼도 되긴 하다. 하지만 이처럼 string 이나 pair<int, int> 같은 STL 혹은 클래스 객체를 파라미터 전달시에는
+// const랑 &를 붙여서 참조시켜주는것이 복사해서 비교하는것을 막아서 불필요한 연산을 막고 시간을 단축시켜 보다 효율적이다.
+// 하지만 const는 코딩테스트에서 딱히 불필요하기에, 결론적으로말하자면 &만 붙여줘도 좋다.
 {
     if (a.first == b.first)  // 만약 first 값이 같다면,
     {
