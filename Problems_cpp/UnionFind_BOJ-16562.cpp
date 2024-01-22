@@ -1,5 +1,5 @@
 #include <iostream>
-#include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -59,7 +59,7 @@ int main()
     }
 
     int sum = 0;
-    set<int> s;  // 중복을 제거한채로, 최상위 루트노드값들을 넣기 위함임.
+    unordered_set<int> s;  // 중복을 제거한채로, 최상위 루트노드값들을 넣기 위함임.
     for(int i=1; i<=n; i++) {
         s.insert(findParent(i));
     }

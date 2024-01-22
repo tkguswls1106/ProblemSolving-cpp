@@ -808,6 +808,9 @@ set<int> s;
 - 오름차순 기본형태: set<int> set1;
 - 내림차순 형태 예시: set<int, greater<int>> set1;
 
+참고로 그저 순서가 정렬되어있지않은 set을 사용하고싶다면,
+'#include <unordered_set>' + 'unordered_set<int> s'을 사용하자. 사용법은 일반적인 set와 동일하다.
+
 set<int> s = { 1,2,3,4,5 };
 s.insert(4);
 
