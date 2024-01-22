@@ -35,7 +35,7 @@ using namespace std;
 // 즉, 경로 압축 최적화 코드를 적용한다면, 나중에 또 x값의 루트값을 찾고자 하더라도, 부모노드를 타고타고 올라가 확인할 필요없이, 바로 갱신된 루트노트값을 전달해줄수 있다는 것이다.
 // 이를 통해 혹시나 최악의 선형적인 트리일 경우에도, findParent()함수 호출시 O(N)의 시간복잡도가 아닌, O(1)처럼 상수의 시간복잡도가 나온다.
 
-int parent[1001002] = { 0, };  // 인덱스값은 parent[0 ~ n+1] 이지만, 어차피 문제에서 1<=n<=1000000 라고 명시되어있음.
+int parent[1001002] = { 0, };  // 인덱스값은 parent[0 ~ n+1] 이지만, 어차피 문제에서 1<=n<=1000000 라고 명시되어있음. 원소의 개수만큼 공간이 존재하면 된다.
 
 int findParent(int x) {  // 루트노드값을 찾아 반환해주는 함수 (find)
     if(x == parent[x]) {
@@ -44,7 +44,7 @@ int findParent(int x) {  // 루트노드값을 찾아 반환해주는 함수 (fi
         return x;  // 루트노드에 도달하였다면, 해당 루트노드값을 반환하며 재귀 종료해서 점차 돌아가기.
     }
 
-    return parent[x] = findParent(parent[x]);  // 경로 압축 최적화
+    return parent[x] = findParent(parent[x]);  // 경로 압축 최적화임. findParent(parent[x])를 할당받은 parent[x]를 반환함.
 }
 
 void merge(int x, int y) {  // 합집합 함수 (union)
