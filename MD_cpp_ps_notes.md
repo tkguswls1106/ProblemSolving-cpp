@@ -105,9 +105,10 @@ DFS는 나중에 그래프와 트리 자료구조에서 유용하게 쓰일것�
 
 < string 에서의 find >
 string str = "TEST";
-str.find("ST");  // 인덱스 반환 (만약 일치하는 값이 없다면, string::npos(== 쓰레기 값)인 4294967295 처럼 반환함. 근데 듣기론 -1도 될지도모르겠다.)
+str.find("ST");  // 인덱스 반환 (만약 일치하는 값이 없다면, string::npos(== 쓰레기 값)인 4294967295 처럼 반환함. 근데 듣기론 -1도 될지도모르겠다. 참고로 아마 auto 자료형으로도 일단 선언 가능.)
 str.find("S");  // 인덱스 반환
-find(str.begin(), str.end(), 'S');  // 반복자 반환
+auto findIdx = s.find("ST", idx);  // idx인덱스부터 끝까지 검색함. 찾은 인덱스 혹은 string::npos 를 반환한다.
+find(str.begin(), str.end(), 'S');  // 반복자 반환 (참고로 이방식은 문자열 검색은 안된다. 문자 검색만 가능하다.)
 
 < vector 에서의 find >
 vector<int> v = {10, 20, 30, 40, 50};
@@ -233,6 +234,7 @@ string str2 = "ST";
 str1.find(str2);  // 2 반환함. (TEST에서 ST의 S는 2번째 인덱스므로)
 str1.find("ST"); // 2 반환함. (주의: 문자열 넣었으므로 큰따옴표로만 사용하기.)
 str1.find('S'); // 2 반환함. (주의: 문자 넣었으므로, 'S' 또는 "S" 모두 사용가능.)
+auto findIdx = str1.find("ST", idx);  // idx인덱스부터 끝까지 검색함. 찾은 인덱스 혹은 string::npos 를 반환한다.
 // 그냥 속편하게 전부 큰따옴표로 통일해서 사용하는것이 나을듯하다.
 
 // 위의 str1.find("ST")와 같은 find함수에서 못찾는경우 예시
