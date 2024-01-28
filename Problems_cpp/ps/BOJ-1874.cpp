@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// 문제 지문이 별로다. 만약 지문이 이해가 안된다면, 'www.youtube.com/watch?v=byCxMbgzEVM&t=19s' 를 참고하자.
+// 문제 지문의 설명이 별로다. 만약 지문이 이해가 안된다면, 'www.youtube.com/watch?v=byCxMbgzEVM&t=19s' 를 참고하자.
 
 int main()
 {
