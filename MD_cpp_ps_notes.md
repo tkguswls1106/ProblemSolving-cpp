@@ -441,7 +441,7 @@ cout << "원소 num의 개수: " << count(v.begin(), v.end(), num);
 cout << "홀수인 원소의 개수: " << count_if(v.begin(), v.end(), isOdd);
 
 // 벡터 배열 max 값 구하는법
-int max = *max_element(v.begin(), v.end());
+int max = *max_element(v.begin(), v.end());  // 만약 일반 배열이라면, 'int max = *max_element(&arr[0], &arr[마지막인덱스+1])' 이렇게 사용이 가능하다.
 // 그 이유는 begin과 end는 요소의 값을 반환하는게 아닌 요소를 가리키는것 뿐이기때문인데, 그렇기에 *포인터를 붙여서 벡터에서 최댓값을 가리키는 반복자가 가리키는 값을 반환하는 것이다.
 // 만약 *포인터를 뺐다면 최댓값을 가리키는 반복자를 반환하는 것이기에 에러가 난다.
 // 참고로 이는 #include <algorithm> 헤더를 작성해야 사용가능하다.
