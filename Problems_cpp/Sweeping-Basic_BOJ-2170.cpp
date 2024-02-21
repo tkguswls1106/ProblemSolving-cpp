@@ -56,6 +56,7 @@ int main()
         }
     }
     sum += r-l; // 마지막 선분을 sum에 합류시켜 더해줌.
+    
     cout << sum;
 
 
