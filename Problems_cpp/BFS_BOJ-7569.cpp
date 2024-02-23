@@ -60,7 +60,7 @@ int main()
                 int b = board[j][k][i];
 
                 if(b == 1) {  // 처음부터 익은토마토
-                    qu.push({j,k,i});  // x y z 순으로 좌표를 넣어야하므로, j j k 가 아닌 j k i 순으로 넣어야한다. for반복문에서 push할때 좌표순서를 주의하자.
+                    qu.push({j,k,i});  // x y z 순으로 좌표를 넣어야하므로, i j k 가 아닌 j k i 순으로 넣어야한다. for반복문에서 push할때 좌표순서를 주의하자.
                     // day는 이미0이라서 생략.
                 }
                 else if(b == 0) {  // 처음부터 안익은토마토

@@ -1,3 +1,4 @@
+#include <string>
 #include <stack>
 #include <iostream>
 
@@ -32,11 +33,12 @@ int main()
                 }
             }
             else if(ch == '.') {
-                if(ch == '.') {
-                    if(st.size() == 0) cout << "yes" << "\n";
-                    else cout << "no" << "\n";
-                }
+                if(st.size() == 0) cout << "yes" << "\n";
+                else cout << "no" << "\n";
             }
         }
     }
+
+
+    return 0;
 }
