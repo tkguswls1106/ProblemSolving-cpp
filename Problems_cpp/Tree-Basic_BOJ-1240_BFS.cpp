@@ -92,7 +92,7 @@ int main()
         cin >> start >> end;
 
         bfs(start);
-        cout << dist[end] - 1 << "\n";  // 애초에 dist값을 1이 아닌 0으로 시작했기에, 결과 출력할때는 -1 해주고 출력해야한다.
+        cout << dist[end] - 1 << "\n";  // 애초에 dist값을 0이 아닌 1로 시작했기에, 결과 출력할때는 -1 해주고 출력해야한다.
 
         fill(&dist[0], &dist[1002], 0);
     }

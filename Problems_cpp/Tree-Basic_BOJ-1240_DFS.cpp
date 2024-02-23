@@ -40,7 +40,9 @@ void dfs(int start, int distSum) {
 
         visited[next] = 1;
         dfs(next, distSum + dist);
-        // 이 문제의 경우에는 여기서 'visited[next] = 0'를 작성하지않아도 된다.
+        // 이 문제의 경우에는 여기서 'visited[next] = 0'를 작성하지않아도 된다. (왜냐면, 이건 백트래킹으로써의 push&pop 으로 되돌아가는 용도의 dfs가 아니기때문임.)
+        // - 주의: 백트래킹의 dfs에서만 "'push & visited=1 & dfs호출' 이후 'pop & visited=0'" 이러한 과정을 거치기때문에,
+        // 이처럼 백트래킹이 아닌 일반적인 dfs를 사용하는 문제의 경우에는, 어차피 백트래킹처럼 pop으로 되돌아가질 않기때문에, 차후 pop이나 visited=0 의 과정은 작성하지 말아야한다.
     }
 }
 
@@ -65,7 +67,7 @@ int main()
         cin >> start >> end;
         finalEnd = end;
 
-        visited[start] = 1;
+        visited[start] = 1;  // 이 문제의 dfs는 백트래킹과 다른 dfs이므로, 사실상 이처럼 먼저 visited=1을 선언하고 가도 좋다.
         dfs(start, 0);
 
         fill(&visited[0], &visited[1002], 0);
