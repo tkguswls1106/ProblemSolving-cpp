@@ -21,6 +21,5 @@ int solution(vector<int> d, int budget) {
 int main()
 {
     // 메인함수 코드 생략
-
     return 0;
 }
