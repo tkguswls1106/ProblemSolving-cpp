@@ -1013,6 +1013,16 @@ string solution(string morse) {
 
 주어진 문자열에서 필요한 자료형에 맞는 정보를 꺼낼 때 유용하게 사용됨.
 stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료형의 정보를 빼낸다.
+
+참고로 커서이동 응용방법도 있다.
+string str2 = "a2b";
+stringstream stream2(str2);
+int num; char ch1; char ch2;
+stream2 >> ch1;  // => a
+num = stream2.get();  // 커서를 오른쪽으로 이동 => 2 (참고로 맨처음에 'stream2 >> ch1;'없이 바로 get 호출하면 첫위치로 뜸)
+ch2 = stream2.get();  // 커서를 오른쪽으로 이동 => b
+cout << stream2.unget();  // 커서를 왼쪽으로 이동 => 2
+
 헷갈리지말아야할것은, 이는 char문자 형식으로 추출이 아닌, string문자열 형식으로 추출한다.
 밑은 그 예시다.
 
