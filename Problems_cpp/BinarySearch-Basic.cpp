@@ -6,6 +6,7 @@ using namespace std;
 
 // [ 이분(이진)탐색 기초 정리 ]
 
+// lower_bound와 upper_bound는 이분탐색(Binary Search)을 기반으로 탐색하는 함수이므로, 시간복잡도는 O(logn)이다.
 // 이분탐색 알고리즘인 밑의 STL 함수들은 반드시 해당 배열을 오름차순으로 정렬 후에 적용해야만 한다.
 // - binary_search(v.begin(), v.end(), num);  // 검색하여 찾는 값이 존재시면 true, 아니면 false를 반환함.
 // - lower_bound(v.begin(), v.end(), num);  // 찾고자 하는 값 이상이 처음 나타나는 위치의 iter반복자를 반환함.
