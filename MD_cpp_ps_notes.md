@@ -107,7 +107,7 @@ DFS는 나중에 그래프와 트리 자료구조에서 유용하게 쓰일것�
 
 lower_bound와 upper_bound는 이분탐색(Binary Search)을 기반으로 탐색하는 함수이므로, 시간복잡도는 O(logN)이다.
 이분탐색 알고리즘인 밑의 STL 함수들은 반드시 해당 배열을 오름차순으로 정렬 후에 적용해야만 한다.
-- binary_search(v.begin(), v.end(), num);  // 검색하여 찾는 값이 존재시면 true, 아니면 false를 반환함.
+- binary_search(v.begin(), v.end(), num);  // 검색하여 찾는 값이 존재하면 true, 아니면 false를 반환함.
 - lower_bound(v.begin(), v.end(), num);  // 찾고자 하는 값 이상이 처음 나타나는 위치의 iter반복자를 반환함.
 - upper_bound(v.begin(), v.end(), num);  // 찾고자 하는 값의 다음(초과) 값이 최초로 나타나는 위치의 iter반복자를 반환함.
 참고로 벡터가 아닌 일반배열이라면, 인덱스 구할때 lower_bound(arr, arr + 6, 3) - arr; 뭐 이런식으로도 사용 가능하다.
