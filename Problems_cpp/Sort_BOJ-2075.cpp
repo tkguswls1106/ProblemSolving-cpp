@@ -1,7 +1,7 @@
 // - 공간 메모리 제한 문제 (배열 정렬 방식) -
 // '우선순위큐' 문제이지만, 'array배열 정렬'로도 풀 수 있는 문제임.
 // 참고로 이 코드는 배열 정렬 방식을 사용하였음.
-// 우선순위큐 방식은 'PriorityQueue_BOJ-2075-BEST.cpp'에 있음.
+// 우선순위큐 방식은 'PriorityQueue_BOJ-2075_BEST.cpp'에 있음.
 
 #include <algorithm>
 #include <iostream>
