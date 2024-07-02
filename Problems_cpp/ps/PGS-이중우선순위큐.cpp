@@ -19,9 +19,7 @@ vector<int> solution(vector<string> operations) {
         else {
             if(s.empty()) continue;
             if(num == 1) {
-                auto iter = s.end();
-                iter--;
-                s.erase(iter);
+                s.erase(--s.end());
             }
             else {
                 s.erase(s.begin());
@@ -29,12 +27,8 @@ vector<int> solution(vector<string> operations) {
         }
     }
     
-    if(s.empty()) return {0,0};
-    else {
-        auto iter = s.end();
-        iter--;
-        return {*iter, *(s.begin())};
-    }
+    if(s.empty()) return {0, 0};
+    else return {*(--s.end()), *(s.begin())};
 }
 
 int main()
