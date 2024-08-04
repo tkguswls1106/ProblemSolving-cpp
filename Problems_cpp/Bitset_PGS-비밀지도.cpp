@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// - bitset count() 개념 참고 :
+// 이 문제에는 해당되지 않지만, 참고로 bitset 내에서 1의 숫자를 구하고싶다면 bs.count()를 사용하면 된다.
+
 // bitset말고 시프트연산자를 활용해서 풀어도되는 문제이기도 하다.
 vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
     vector<string> answer;
