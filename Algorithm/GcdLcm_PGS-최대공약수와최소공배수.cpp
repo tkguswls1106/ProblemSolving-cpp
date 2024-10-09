@@ -3,12 +3,14 @@
 
 using namespace std;
 
-int gcd(int a, int b) {  // 최대공약수
+// 최대공약수(GCD)
+int gcd(int a, int b) {
     if(b == 0) return a;  // 헷갈릴때 Tip: b비 a아
     return gcd(b, a%b);  // 헷갈릴때 Tip: b비 a%b압
 }
 
-int lcm(int a, int b) {  // 최소공배수
+// 최소공배수(LCM)
+int lcm(int a, int b) {
     return a*b / gcd(a,b);
 }
 

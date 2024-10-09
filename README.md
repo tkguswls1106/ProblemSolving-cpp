@@ -14,22 +14,24 @@
 ### Class Naming
 유형에 따라 적절히 선택 후, 순서를 지켜 하이픈으로 구분한다.<br>
 단, 우선순위 2,3 및 4,5 사이는 언더바로 구분한다.
-- **우선순위 1** : 알고리즘 종류 (ex. UnionFind)
+- **우선순위 1** : 대주제
+  - 알고리즘 : (ex. `UnionFind`)
+  - 자료구조 : (ex. `Stack`)
 - **우선순위 2** : 소주제
-  - 개념정리 (ex. Basic)
-  - 일반적 (ex. NodeSize)
+  - 개념 정리 : (ex. `Basic`)
+  - 세부 유형 : (ex. `NodeSize`)
 - **우선순위 3** : 문제 종류
-  - 백준 (ex. BOJ)
-  - 프로그래머스 (ex. PGS)
+  - 백준 : `BOJ`
+  - 프로그래머스 : `PGS`
 - **우선순위 4** : 문제 정보
-  - 번호 (ex. 4195)
-  - 이름 (ex. 미로탈출)
+  - 번호 : (ex. `11659`)
+  - 이름 : (ex. `미로탈출`)
 - **우선순위 5** : 풀이 결과
-  - 최적 (ex. BEST)
-  - 통과 (ex. PASS)
-  - 실패 (ex. FAIL)
+  - 최적 : `BEST`
+  - 성공 : `PASS` (or `생략`)
+  - 실패 : `FAIL`
 
-&#8594;&nbsp;&nbsp;UnionFind-NodeSize_BOJ-4195_BEST.cpp
+&#8594;&nbsp;&nbsp;`UnionFind-NodeSize_BOJ-4195_BEST`.cpp
 
 <br>
 
