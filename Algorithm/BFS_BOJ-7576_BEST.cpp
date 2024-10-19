@@ -34,7 +34,7 @@ void bfs() {
             if(dayV[nx][ny] != -1) continue;  // 안익은토마토가 아니라면 건너뜀. 비어있거나 익은토마토인 경우는 건너뛴다는 뜻임. (즉, 안익은토마토만 bfs 적용시키겠다는 뜻임.)
 
             qu.push({nx,ny});
-            dayV[nx][ny] = dayV[cur.first][cur.second] + 1;  // 주변좌표의 day값 = 기준좌표 day값 + 1;
+            dayV[nx][ny] = dayV[cur.first][cur.second] + 1;  // 주변좌표의 day값 = 기준좌표 day값 + 1; (참고로 어차피 기존에 day가 -1이었어도, 0에서 +1값을 덮어씌우기에 문제없음.)
         }
     }
 }

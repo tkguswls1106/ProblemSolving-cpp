@@ -40,7 +40,7 @@ void bfs() {
             if(day[nx][ny][nz] != -1) continue;  // 안익은토마토가 아니라면 bfs 적용 안시킴.
 
             qu.push({nx,ny,nz});
-            day[nx][ny][nz] = day[get<0>(cur)][get<1>(cur)][get<2>(cur)] + 1;
+            day[nx][ny][nz] = day[get<0>(cur)][get<1>(cur)][get<2>(cur)] + 1;  // 참고로 어차피 기존에 day가 -1이었어도, 0에서 +1값을 덮어씌우기에 문제없음.
         }
     }
 }
